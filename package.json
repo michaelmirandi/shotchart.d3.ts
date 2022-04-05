@@ -1,0 +1,32 @@
+{
+  "name": "shotchart.d3.ts",
+  "version": "1.0.0",
+  "description": "Implementation of a blank shotchart utilizing D3, React, & Typescript.",
+  "main": "index.js",
+  "scripts": {
+    "test": "npm test"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/michaelmirandi/shotchart.d3.ts.git"
+  },
+  "keywords": [
+    "shotchart",
+    "d3",
+    "basketball"
+  ],
+  "author": "Michael Mirandi",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/michaelmirandi/shotchart.d3.ts/issues"
+  },
+  "homepage": "https://github.com/michaelmirandi/shotchart.d3.ts#readme",
+  "devDependencies": {
+    "@types/react": "^17.0.43",
+    "react": "^17.0.2",
+    "typescript": "^4.6.3"
+  },
+  "dependencies": {
+    "d3": "^7.3.0"
+  }
+}
