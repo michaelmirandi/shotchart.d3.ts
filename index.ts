@@ -1,7 +1,7 @@
 export { Shotchart } from './src/shotcharts/Shotchart'
 export { ZonedShotchart } from './src/shotcharts/ZonedShotchart'
-import { drawCourt, createSectionedZones, getPrettyPercentage, createColorScale } from './src/utilities/Utilities';
-import {
+export { drawCourt, createSectionedZones, getPrettyPercentage, createColorScale } from './src/utilities/Utilities';
+export {
     ICourtLocation,
     ILeagueSettings,
     IShotchartSettings,
