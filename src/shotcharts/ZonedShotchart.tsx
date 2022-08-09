@@ -17,7 +17,8 @@ export const ZonedShotchart: React.FC<IShotchart> = (props) => {
     // draw stuff here...
   }, [props.data]);
   return <ShotchartLinesContext.Provider value={linesContext}>
-    <svg ref={containerRef.current} width="100%"></svg>;
+    {/* @ts-ignore */}
+    <svg ref={containerRef} width="100%"></svg>;
 
   </ShotchartLinesContext.Provider>
   
