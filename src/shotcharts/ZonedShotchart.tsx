@@ -15,5 +15,5 @@ export const ZonedShotchart: React.FC<IShotchart> = (props) => {
   React.useEffect(() => {
     // draw stuff here...
   }, [props.data]);
-  return <svg ref={containerRef} width="100%"></svg>;
+  return <svg ref={containerRef.current} width="100%"></svg>;
 };

@@ -60,3 +60,7 @@ export interface IZones {
 export interface IShotchartLinesContext {
   [index: string]: ICourtLocation[];
 }
+
+export interface IZonedShotchartContext {
+  visibleShotData: any[]
+}

@@ -3,7 +3,8 @@ import {
   ICourtLocation,
   IShotchartSettings,
   IZonePoints,
-  IShotchartLinesContext
+  IShotchartLinesContext,
+  IZonedShotchartContext
 } from './Interfaces';
 import { lookup } from './Types';
 
@@ -32,15 +33,15 @@ export function appendArcPath(
     .radius(radius)
     .angle(function (d, i) {
       temp.push({
-        x: translateX + radius * Math.cos(a(i) - Math.PI / 2),
-        y: translateY + radius * Math.sin(a(i) - Math.PI / 2)
+        x: (translateX === undefined ? 0 : translateX) + radius * Math.cos(a(i) - Math.PI / 2),
+        y: (translateY === undefined ? 0 : translateY) + radius * Math.sin(a(i) - Math.PI / 2)
       });
       return a(i);
     });
 
   // figure out how to add context here...
   // generate state letiables... maybe pass in a hook with a dictionary??
-  if (xyState === undefined) {
+  if (xyState !== undefined && globalContext !== undefined) {
     globalContext[xyState] = temp;
   }
 
@@ -49,9 +50,10 @@ export function appendArcPath(
 
 export function createSectionedZones(
   shotchartSettings: IShotchartSettings,
-  base: any
+  base: any,
+  globalContext: IShotchartLinesContext,
+  zoneContext?: IZonedShotchartContext
 ): void {
-  let self = this;
   // create outside line for rim range
   // fill based on the circle. This is not a polygon like the other shapes on the visualization
   appendArcPath(
@@ -63,9 +65,10 @@ export function createSectionedZones(
     shotchartSettings.visibleCourtLength() -
       shotchartSettings.basketProtrusionLength -
       shotchartSettings.basketDiameter / 2,
-    'rimXY'
+    'rimXY',
+    globalContext
   )
-    .attr('class', 'shotzone rim-zone' + self.props.shotchartNumber)
+    .attr('class', 'shotzone rim-zone' + shotchartSettings.shotchartNumber)
     .attr(
       'transform',
       'translate(' +
@@ -86,8 +89,8 @@ export function createSectionedZones(
     shotchartSettings.visibleCourtLength() -
       shotchartSettings.basketProtrusionLength -
       shotchartSettings.basketDiameter / 2,
-    'floaterXY'
-    //globalContext
+    'floaterXY',
+    globalContext
   )
     .attr('class', 'shotzone floater')
     .attr(
@@ -185,14 +188,14 @@ export function createSectionedZones(
     ]
   };
 
-  let r3Line = this.state.threePointLineXY.filter(function (i: ICourtLocation) {
+  let r3Line = globalContext.threePointLineXY.filter(function (i: ICourtLocation) {
     // change this to match up with AP
     return i.x < shotchartSettings.leagueSettings.rightThreeInside.x;
   });
 
   r3.points = r3.points.concat(r3Line).concat({ x: 5, y: 0 });
 
-  let l3Line = this.state.threePointLineXY.filter(function (i: ICourtLocation) {
+  let l3Line = globalContext.threePointLineXY.filter(function (i: ICourtLocation) {
     return (
       i.x >
       shotchartSettings.courtWidth -
@@ -229,7 +232,7 @@ export function createSectionedZones(
     points: [{ x: 5, y: 0 }]
   };
 
-  let m3Line = this.state.threePointLineXY.filter(function (i: ICourtLocation) {
+  let m3Line = globalContext.threePointLineXY.filter(function (i: ICourtLocation) {
     // change this to match with AP
     return (
       i.x > shotchartSettings.leagueSettings.rightThreeInside.x &&
@@ -258,7 +261,7 @@ export function createSectionedZones(
     ]
   };
 
-  let insideRbmr = this.state.floaterXY.filter(function (i: ICourtLocation) {
+  let insideRbmr = globalContext.floaterXY.filter(function (i: ICourtLocation) {
     // change x portion to match AP
     return (
       i.y <= shotchartSettings.visibleCourtLength() &&
@@ -285,7 +288,7 @@ export function createSectionedZones(
     }
   ]);
 
-  let insideLbmr = this.state.floaterXY.filter(function (i: ICourtLocation) {
+  let insideLbmr = globalContext.floaterXY.filter(function (i: ICourtLocation) {
     // change x portion to match AP
     return (
       i.y <= shotchartSettings.visibleCourtLength() &&
@@ -323,7 +326,7 @@ export function createSectionedZones(
     ])
   };
 
-  let insideRwmr = this.state.floaterXY.filter(function (i: ICourtLocation) {
+  let insideRwmr = globalContext.floaterXY.filter(function (i: ICourtLocation) {
     // change x portion to match AP
     return (
       i.y < shotchartSettings.visibleCourtLength() &&
@@ -348,7 +351,7 @@ export function createSectionedZones(
     points: outsideRwmr.reverse().concat(insideRwmr)
   };
 
-  let insideLwmr = this.state.floaterXY.filter(function (i: ICourtLocation) {
+  let insideLwmr = globalContext.floaterXY.filter(function (i: ICourtLocation) {
     // change x portion to match AP
     return (
       i.y < shotchartSettings.visibleCourtLength() &&
@@ -373,7 +376,7 @@ export function createSectionedZones(
     points: outsideLwmr.concat(insideLwmr.reverse())
   };
 
-  let insideMmr = this.state.floaterXY.filter(function (i: ICourtLocation) {
+  let insideMmr = globalContext.floaterXY.filter(function (i: ICourtLocation) {
     // change x portion to match AP
     return (
       i.y <
@@ -389,7 +392,7 @@ export function createSectionedZones(
     points: outsideMmr.concat(insideMmr.reverse())
   };
 
-  let insideRf = this.state.rimXY.filter(function (i: ICourtLocation) {
+  let insideRf = globalContext.rimXY.filter(function (i: ICourtLocation) {
     return (
       i.y >
         shotchartSettings.visibleCourtLength() -
@@ -406,7 +409,7 @@ export function createSectionedZones(
     points: outsideRf.concat(insideRf.reverse())
   };
 
-  let insideLf = this.state.rimXY.filter(function (i: ICourtLocation) {
+  let insideLf = globalContext.rimXY.filter(function (i: ICourtLocation) {
     return (
       i.y >
         shotchartSettings.visibleCourtLength() -
@@ -423,7 +426,7 @@ export function createSectionedZones(
     points: insideLf.concat(outsideLf)
   };
 
-  let insideMf = this.state.rimXY.filter(function (i: ICourtLocation) {
+  let insideMf = globalContext.rimXY.filter(function (i: ICourtLocation) {
     return (
       i.y <
       shotchartSettings.visibleCourtLength() -
@@ -453,7 +456,7 @@ export function createSectionedZones(
       lf: lf.points,
       rf: rf.points,
       mf: mf.points,
-      rim: this.state.rimXY
+      rim: globalContext.rimXY
     },
     zones: [rc3, lc3, r3, l3, m3, rbmr, lbmr, rwmr, lwmr, mmr, lf, rf, mf]
   };
@@ -474,13 +477,17 @@ export function createSectionedZones(
         .join(' ');
     });
 
-  labelShotZones(shotchartSettings, base, zonePoints);
+    if (zoneContext !== undefined) {
+      labelShotZones(shotchartSettings, base, zonePoints, zoneContext);
+
+    }
 }
 
 function labelShotZones(
   shotchartSettings: IShotchartSettings,
   base: any,
-  zonePoints: IZonePoints
+  zonePoints: IZonePoints,
+  context: IZonedShotchartContext
 ) {
   let zoneLookup: lookup = {
     rc3: 'R-C3',
@@ -517,7 +524,7 @@ function labelShotZones(
   };
 
   for (let key in zoneLookup) {
-    let tempData = findShotZoneData(zoneLookup[key])[0];
+    let tempData = findShotZoneData(zoneLookup[key], context)[0];
     tempData = tempData == null ? { fga: 0, fgm: 0, percentile: 0 } : tempData;
     let center = findCentroid(zonePoints.labeledZones[key]);
     let prettyFormat;
@@ -584,9 +591,9 @@ export function findCentroid(points: ICourtLocation[]): number[] {
   return [x / d, y / d];
 }
 
-export function findShotZoneData(shotzone: string): any[] {
+export function findShotZoneData(shotzone: string, context: IZonedShotchartContext): any[] {
   // pass context....
-  return this.props.visibleShotData.filter(function (i: any) {
+  return context.visibleShotData.filter(function (i: any) {
     return i.bucket == shotzone;
   });
 }

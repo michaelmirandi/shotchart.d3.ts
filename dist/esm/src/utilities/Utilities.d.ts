@@ -1,0 +1,10 @@
+import * as d3 from 'd3';
+import { ICourtLocation, IShotchartSettings, IShotchartLinesContext, IZonedShotchartContext } from './Interfaces';
+export declare function appendArcPath(base: any, radius: number, startAngle: number, endAngle: number, translateX?: number, translateY?: number, xyState?: string, globalContext?: IShotchartLinesContext): any;
+export declare function createSectionedZones(shotchartSettings: IShotchartSettings, base: any, globalContext: IShotchartLinesContext, zoneContext?: IZonedShotchartContext): void;
+export declare function findCentroid(points: ICourtLocation[]): number[];
+export declare function findShotZoneData(shotzone: string, context: IZonedShotchartContext): any[];
+export declare function getPrettyPercentage(fgm: number, fga: number): string;
+export declare function shotZoneColor(perc: number): string;
+export declare function createColorScale(): d3.ScaleLinear<string, string>;
+export declare function drawCourt(shotchartSettings: IShotchartSettings, node: any, globalContext: IShotchartLinesContext): void;

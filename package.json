@@ -1,10 +1,12 @@
 {
   "name": "shotchart.d3.ts",
-  "version": "1.0.0",
+  "version": "0.0.2",
   "description": "Implementation of a blank shotchart utilizing D3, React, & Typescript.",
-  "main": "index.js",
+  "main": "dist/cjs/index.js",
+  "module": "dist/esm/index.js",
   "scripts": {
-    "test": "npm test"
+    "test": "npm test",
+    "build": "rollup -c"
   },
   "repository": {
     "type": "git",
@@ -22,8 +24,15 @@
   },
   "homepage": "https://github.com/michaelmirandi/shotchart.d3.ts#readme",
   "devDependencies": {
+    "@rollup/plugin-commonjs": "^22.0.2",
+    "@rollup/plugin-node-resolve": "^13.3.0",
+    "@rollup/plugin-typescript": "^8.3.4",
     "@types/react": "^17.0.43",
     "react": "^17.0.2",
+    "rollup-plugin-dts": "^4.2.2",
+    "rollup-plugin-ignore": "^1.0.10",
+    "rollup-plugin-peer-deps-external": "^2.2.4",
+    "rollup-plugin-terser": "^7.0.2",
     "typescript": "^4.6.3"
   },
   "dependencies": {
