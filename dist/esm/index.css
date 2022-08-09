@@ -1,0 +1,90 @@
+.shot-chart-court *{
+    fill:transparent;
+    stroke: black;
+    stroke-width: 0.05
+  }
+  .shot-chart-court-ft-circle-bottom{
+    stroke-dasharray:1.5, 1
+  }
+  .shot-chart-court-hoop,.shot-chart-court-backboard{
+    z-index:100
+  }
+  .shot-chart-title{
+    font-size:15%;
+    text-transform:uppercase
+  }
+  
+  #shotchart-page {
+    text-align: center;
+    padding-top: 50px;
+  }
+  
+  .shotzone {
+    stroke: black;
+    fill-opacity: .7;
+    stroke-width: .08;
+    stroke-opacity: 1;
+  }
+  
+  .shotchart-loading {
+  width: 100%;
+  align-items: center;
+  display: flex;
+  height: 90%;
+  justify-content: center;
+  }
+  
+  text {
+  font-size: .8rem;
+  fill: #333333 !important
+  }
+  
+  .shotchart-container svg {
+  width: 100%;
+  display: block;
+  }
+  
+  #shot-chart-legend rect {
+  fill-opacity: .7;
+  }
+  
+  #shot-chart-legend {
+  padding-bottom: 1vw;
+  }
+  
+  .right-corner-three-zone-text, .left-corner-three-zone-text {
+  font-size: 1rem;
+  }
+  
+  @media screen and (min-aspect-ratio: 11/8) {
+  text {
+    font-size: 1rem;
+  }
+  
+  .shotchart-container svg {
+    width: 100%;
+    margin: 0;
+  }
+  }
+  
+  @media screen and (min-width: 1800px) {
+  text {
+    font-size: 1rem;
+  }
+  }
+  
+  @media screen and (min-width: 2300px) {
+    text {
+      font-size: .6rem;
+    }
+  }
+  
+  @media screen and (max-width: 800px) {
+    text {
+      font-size: .8rem;
+    }
+  
+    .right-corner-three-zone-text, .left-corner-three-zone-text {
+    font-size: .5rem;
+    }
+  }

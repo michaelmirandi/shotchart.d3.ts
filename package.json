@@ -1,6 +1,6 @@
 {
   "name": "shotchart.d3.ts",
-  "version": "0.0.2",
+  "version": "0.0.3",
   "description": "Implementation of a blank shotchart utilizing D3, React, & Typescript.",
   "main": "dist/cjs/index.js",
   "module": "dist/esm/index.js",
@@ -36,6 +36,7 @@
     "typescript": "^4.6.3"
   },
   "dependencies": {
-    "d3": "^7.3.0"
+    "d3": "^7.3.0",
+    "rollup-plugin-import-css": "^3.0.3"
   }
 }

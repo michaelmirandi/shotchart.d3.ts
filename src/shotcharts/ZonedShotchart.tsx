@@ -2,18 +2,23 @@ import * as React from 'react';
 import { drawCourt } from '../utilities/Utilities';
 import { IShotchart, IShotchartLinesContext } from '../utilities/Interfaces';
 import { ShotchartLinesContext } from '../utilities/Context';
+import '../css/court.css'
 
 export const ZonedShotchart: React.FC<IShotchart> = (props) => {
-  const globalContext = React.useContext<IShotchartLinesContext>(
+  const linesContext = React.useContext<IShotchartLinesContext>(
     ShotchartLinesContext
   );
   const containerRef = React.useRef();
   React.useEffect(() => {
-    drawCourt(props.chartSettings, containerRef, globalContext);
+    drawCourt(props.chartSettings, containerRef, linesContext);
   }, []);
 
   React.useEffect(() => {
     // draw stuff here...
   }, [props.data]);
-  return <svg ref={containerRef.current} width="100%"></svg>;
+  return <ShotchartLinesContext.Provider value={linesContext}>
+    <svg ref={containerRef.current} width="100%"></svg>;
+
+  </ShotchartLinesContext.Provider>
+  
 };
