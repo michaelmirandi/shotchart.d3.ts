@@ -1,5 +1,9 @@
-import { IShotchartLinesContext, IZonedShotchartContext } from './Interfaces';
-import * as React from 'react';
+import {
+  IShotchartLinesContext,
+  IZoneData,
+  IZonedShotchartContext,
+} from "./Interfaces";
+import * as React from "react";
 
 export const ShotchartLinesContext =
   React.createContext<IShotchartLinesContext>({
@@ -7,10 +11,10 @@ export const ShotchartLinesContext =
     restrictedAreaXY: [],
     ftOutXY: [],
     floaterXY: [],
-    rimXY: []
+    rimXY: [],
   });
 
-  export const ZonedShotchartContext =
+export const ZonedShotchartContext = (data: IZoneData[]) =>
   React.createContext<IZonedShotchartContext>({
-    visibleShotData: []
+    visibleShotData: data,
   });

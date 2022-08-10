@@ -1,3 +1,5 @@
+import { ShotchartZone, ShotchartZoneCSS } from "./Types";
+
 export interface ICourtLocation {
   x: number;
   y: number;
@@ -40,7 +42,10 @@ export interface IShotchartSettings {
 
 export interface IShotchart {
   chartSettings: IShotchartSettings;
-  data: any[];
+}
+
+export interface IZonedShotchart extends IShotchart {
+  data: IZoneData[];
 }
 
 export interface IZonePoints {
@@ -61,6 +66,13 @@ export interface IShotchartLinesContext {
   [index: string]: ICourtLocation[];
 }
 
+export interface IZoneData {
+  bucket: ShotchartZone;
+  fgm: number;
+  fga: number;
+  percentile: number;
+}
+
 export interface IZonedShotchartContext {
-  visibleShotData: any[]
+  visibleShotData: IZoneData[];
 }

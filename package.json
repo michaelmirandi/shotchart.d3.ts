@@ -1,12 +1,13 @@
 {
   "name": "shotchart.d3.ts",
-  "version": "0.0.4",
+  "version": "0.0.6",
   "description": "Implementation of a blank shotchart utilizing D3, React, & Typescript.",
   "main": "dist/cjs/index.js",
   "module": "dist/esm/index.js",
   "scripts": {
     "test": "npm test",
-    "build": "rollup -c"
+    "build": "rollup -c",
+    "lint": "npx prettier --write ."
   },
   "repository": {
     "type": "git",

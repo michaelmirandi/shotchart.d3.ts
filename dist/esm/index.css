@@ -1,90 +1,95 @@
-.shot-chart-court *{
-    fill:transparent;
-    stroke: black;
-    stroke-width: 0.05
-  }
-  .shot-chart-court-ft-circle-bottom{
-    stroke-dasharray:1.5, 1
-  }
-  .shot-chart-court-hoop,.shot-chart-court-backboard{
-    z-index:100
-  }
-  .shot-chart-title{
-    font-size:15%;
-    text-transform:uppercase
-  }
-  
-  #shotchart-page {
-    text-align: center;
-    padding-top: 50px;
-  }
-  
-  .shotzone {
-    stroke: black;
-    fill-opacity: .7;
-    stroke-width: .08;
-    stroke-opacity: 1;
-  }
-  
-  .shotchart-loading {
-  width: 100%;
-  align-items: center;
-  display: flex;
-  height: 90%;
-  justify-content: center;
-  }
-  
-  text {
-  font-size: .8rem;
-  fill: #333333 !important
-  }
-  
-  .shotchart-container svg {
+.shot-chart-court * {
+  fill: transparent;
+  stroke: #333333;
+  stroke-width: 0.05;
+  stroke-opacity: 0.5;
+}
+
+.shot-chart-court {
+  border: none;
+  outline: none;
+}
+.shot-chart-court-ft-circle-bottom {
+  stroke-dasharray: 1.5, 1;
+}
+
+.shot-chart-court-hoop,
+.shot-chart-court-backboard {
+  z-index: 100;
+}
+
+.shotzone {
+  stroke: black;
+  fill-opacity: 0.7;
+  stroke-width: 0.08;
+  stroke-opacity: 1;
+  z-index: 10000;
+}
+
+#shotchart-container {
+  border-radius: 0.3rem;
+  border: 2px solid;
+  border-color: black;
+}
+
+text {
+  font-size: 0.07rem;
+  stroke: black !important;
+  fill: black !important;
+}
+
+.shotchart-container svg {
   width: 100%;
   display: block;
-  }
-  
-  #shot-chart-legend rect {
-  fill-opacity: .7;
-  }
-  
-  #shot-chart-legend {
-  padding-bottom: 1vw;
-  }
-  
-  .right-corner-three-zone-text, .left-corner-three-zone-text {
-  font-size: 1rem;
-  }
-  
-  @media screen and (min-aspect-ratio: 11/8) {
+}
+
+.right-corner-three-zone-text,
+.left-corner-three-zone-text {
+  font-size: 0.04rem;
+  stroke: black !important;
+}
+
+#light-shotchart-zone {
+  fill: white !important;
+  stroke: white !important;
+}
+
+@media screen and (min-aspect-ratio: 11/8) {
   text {
-    font-size: 1rem;
+    font-size: 0.07rem;
   }
-  
+
   .shotchart-container svg {
     width: 100%;
     margin: 0;
   }
-  }
-  
-  @media screen and (min-width: 1800px) {
+}
+
+@media screen and (min-width: 1800px) {
   text {
-    font-size: 1rem;
+    font-size: 0.06rem;
   }
+}
+
+@media screen and (min-width: 2300px) {
+  text {
+    font-size: 0.15rem;
   }
-  
-  @media screen and (min-width: 2300px) {
-    text {
-      font-size: .6rem;
-    }
+}
+
+@media screen and (max-width: 800px) {
+  text {
+    font-size: 0.08rem;
   }
-  
-  @media screen and (max-width: 800px) {
-    text {
-      font-size: .8rem;
-    }
-  
-    .right-corner-three-zone-text, .left-corner-three-zone-text {
-    font-size: .5rem;
-    }
+
+  .right-corner-three-zone-text,
+  .left-corner-three-zone-text {
+    font-size: 0.05rem;
   }
+}
+
+@media print {
+  text {
+    font-size: 0.09rem;
+  }
+}

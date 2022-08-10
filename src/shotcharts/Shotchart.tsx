@@ -1,6 +1,6 @@
-import { Box } from '@mui/system';
-import * as React from 'react';
-import { IShotchartSettings } from '../utilities/Interfaces';
+import { Box } from "@mui/system";
+import * as React from "react";
+import { IShotchartSettings } from "../utilities/Interfaces";
 
 // TO DO...
 /*
@@ -18,7 +18,7 @@ export const Shotchart: React.FC<IShotchartSettings> = () => {
   return (
     <Box
       sx={{
-        width: '100%'
+        width: "100%",
       }}
     ></Box>
   );

@@ -1,12 +1,13 @@
-import * as d3 from 'd3';
+import * as d3 from "d3";
 import {
   ICourtLocation,
   IShotchartSettings,
   IZonePoints,
   IShotchartLinesContext,
-  IZonedShotchartContext
-} from './Interfaces';
-import { lookup } from './Types';
+  IZonedShotchartContext,
+  IZoneData,
+} from "./Interfaces";
+import { lookup, ShotchartZone, ShotchartZoneCSS } from "./Types";
 
 export function appendArcPath(
   base: any,
@@ -33,8 +34,12 @@ export function appendArcPath(
     .radius(radius)
     .angle(function (d, i) {
       temp.push({
-        x: (translateX === undefined ? 0 : translateX) + radius * Math.cos(a(i) - Math.PI / 2),
-        y: (translateY === undefined ? 0 : translateY) + radius * Math.sin(a(i) - Math.PI / 2)
+        x:
+          (translateX === undefined ? 0 : translateX) +
+          radius * Math.cos(a(i) - Math.PI / 2),
+        y:
+          (translateY === undefined ? 0 : translateY) +
+          radius * Math.sin(a(i) - Math.PI / 2),
       });
       return a(i);
     });
@@ -45,14 +50,14 @@ export function appendArcPath(
     globalContext[xyState] = temp;
   }
 
-  return base.append('path').datum(d3.range(points)).attr('d', line);
+  return base.append("path").datum(d3.range(points)).attr("d", line);
 }
 
 export function createSectionedZones(
   shotchartSettings: IShotchartSettings,
   base: any,
-  globalContext: IShotchartLinesContext,
-  zoneContext?: IZonedShotchartContext
+  linesContext: IShotchartLinesContext,
+  zoneContext: IZonedShotchartContext
 ): void {
   // create outside line for rim range
   // fill based on the circle. This is not a polygon like the other shapes on the visualization
@@ -65,19 +70,19 @@ export function createSectionedZones(
     shotchartSettings.visibleCourtLength() -
       shotchartSettings.basketProtrusionLength -
       shotchartSettings.basketDiameter / 2,
-    'rimXY',
-    globalContext
+    "rimXY",
+    linesContext
   )
-    .attr('class', 'shotzone rim-zone' + shotchartSettings.shotchartNumber)
+    .attr("class", "shotzone rim-zone" + shotchartSettings.shotchartNumber)
     .attr(
-      'transform',
-      'translate(' +
+      "transform",
+      "translate(" +
         shotchartSettings.courtWidth / 2 +
-        ', ' +
+        ", " +
         (shotchartSettings.visibleCourtLength() -
           shotchartSettings.basketProtrusionLength -
           shotchartSettings.basketDiameter / 2) +
-        ')'
+        ")"
     );
 
   appendArcPath(
@@ -89,30 +94,30 @@ export function createSectionedZones(
     shotchartSettings.visibleCourtLength() -
       shotchartSettings.basketProtrusionLength -
       shotchartSettings.basketDiameter / 2,
-    'floaterXY',
-    globalContext
+    "floaterXY",
+    linesContext
   )
-    .attr('class', 'shotzone floater')
+    .attr("class", "shotzone floater")
     .attr(
-      'transform',
-      'translate(' +
+      "transform",
+      "translate(" +
         shotchartSettings.courtWidth / 2 +
-        ', ' +
+        ", " +
         (shotchartSettings.visibleCourtLength() -
           shotchartSettings.basketProtrusionLength -
           shotchartSettings.basketDiameter / 2) +
-        ')'
+        ")"
     );
   // points must be in order
   let rc3 = {
-    className: 'shotzone right-corner-three-zone',
+    className: "shotzone right-corner-three-zone",
     points: [
       { x: 0, y: shotchartSettings.visibleCourtLength() },
       {
         x: 0,
         y:
           shotchartSettings.visibleCourtLength() -
-          shotchartSettings.leagueSettings.threePointCutOffLength
+          shotchartSettings.leagueSettings.threePointCutOffLength,
       },
       {
         x:
@@ -121,20 +126,20 @@ export function createSectionedZones(
           2,
         y:
           shotchartSettings.visibleCourtLength() -
-          shotchartSettings.leagueSettings.threePointCutOffLength
+          shotchartSettings.leagueSettings.threePointCutOffLength,
       },
       {
         x:
           (shotchartSettings.courtWidth -
             shotchartSettings.leagueSettings.threePointSideRadius * 2) /
           2,
-        y: shotchartSettings.visibleCourtLength()
-      }
-    ]
+        y: shotchartSettings.visibleCourtLength(),
+      },
+    ],
   };
 
   let lc3 = {
-    className: 'shotzone left-corner-three-zone',
+    className: "shotzone left-corner-three-zone",
     points: [
       {
         x:
@@ -142,7 +147,7 @@ export function createSectionedZones(
           (shotchartSettings.courtWidth -
             shotchartSettings.leagueSettings.threePointSideRadius * 2) /
             2,
-        y: shotchartSettings.visibleCourtLength()
+        y: shotchartSettings.visibleCourtLength(),
       },
       {
         x:
@@ -152,29 +157,29 @@ export function createSectionedZones(
             2,
         y:
           shotchartSettings.visibleCourtLength() -
-          shotchartSettings.leagueSettings.threePointCutOffLength
+          shotchartSettings.leagueSettings.threePointCutOffLength,
       },
       {
         x: shotchartSettings.courtWidth,
         y:
           shotchartSettings.visibleCourtLength() -
-          shotchartSettings.leagueSettings.threePointCutOffLength
+          shotchartSettings.leagueSettings.threePointCutOffLength,
       },
       {
         x: shotchartSettings.courtWidth,
-        y: shotchartSettings.visibleCourtLength()
-      }
-    ]
+        y: shotchartSettings.visibleCourtLength(),
+      },
+    ],
   };
   let r3 = {
-    className: 'shotzone right-three-zone',
+    className: "shotzone right-three-zone",
     points: [
       { x: 0, y: 0 },
       {
         x: 0,
         y:
           shotchartSettings.visibleCourtLength() -
-          shotchartSettings.leagueSettings.threePointCutOffLength
+          shotchartSettings.leagueSettings.threePointCutOffLength,
       },
       {
         x:
@@ -183,19 +188,23 @@ export function createSectionedZones(
           2,
         y:
           shotchartSettings.visibleCourtLength() -
-          shotchartSettings.leagueSettings.threePointCutOffLength
-      }
-    ]
+          shotchartSettings.leagueSettings.threePointCutOffLength,
+      },
+    ],
   };
 
-  let r3Line = globalContext.threePointLineXY.filter(function (i: ICourtLocation) {
+  let r3Line = linesContext.threePointLineXY.filter(function (
+    i: ICourtLocation
+  ) {
     // change this to match up with AP
     return i.x < shotchartSettings.leagueSettings.rightThreeInside.x;
   });
 
   r3.points = r3.points.concat(r3Line).concat({ x: 5, y: 0 });
 
-  let l3Line = globalContext.threePointLineXY.filter(function (i: ICourtLocation) {
+  let l3Line = linesContext.threePointLineXY.filter(function (
+    i: ICourtLocation
+  ) {
     return (
       i.x >
       shotchartSettings.courtWidth -
@@ -204,7 +213,7 @@ export function createSectionedZones(
   });
 
   let l3 = {
-    className: 'shotzone left-three-zone',
+    className: "shotzone left-three-zone",
     points: l3Line.concat([
       {
         x:
@@ -214,25 +223,27 @@ export function createSectionedZones(
             2,
         y:
           shotchartSettings.visibleCourtLength() -
-          shotchartSettings.leagueSettings.threePointCutOffLength
+          shotchartSettings.leagueSettings.threePointCutOffLength,
       },
       {
         x: shotchartSettings.courtWidth,
         y:
           shotchartSettings.visibleCourtLength() -
-          shotchartSettings.leagueSettings.threePointCutOffLength
+          shotchartSettings.leagueSettings.threePointCutOffLength,
       },
       { x: shotchartSettings.courtWidth, y: 0 },
-      { x: shotchartSettings.courtWidth - 5, y: 0 }
-    ])
+      { x: shotchartSettings.courtWidth - 5, y: 0 },
+    ]),
   };
 
   let m3 = {
-    className: 'shotzone middle-three-zone',
-    points: [{ x: 5, y: 0 }]
+    className: "shotzone middle-three-zone",
+    points: [{ x: 5, y: 0 }],
   };
 
-  let m3Line = globalContext.threePointLineXY.filter(function (i: ICourtLocation) {
+  let m3Line = linesContext.threePointLineXY.filter(function (
+    i: ICourtLocation
+  ) {
     // change this to match with AP
     return (
       i.x > shotchartSettings.leagueSettings.rightThreeInside.x &&
@@ -245,23 +256,23 @@ export function createSectionedZones(
   m3.points = m3.points.concat(m3Line);
   m3.points = m3.points.concat([
     { x: shotchartSettings.courtWidth - 5, y: 0 },
-    { x: shotchartSettings.courtWidth, y: 0 }
+    { x: shotchartSettings.courtWidth, y: 0 },
   ]);
 
   let rbmr = {
-    className: 'shotzone right-baseline-midrange-zone',
+    className: "shotzone right-baseline-midrange-zone",
     points: [
       {
         x:
           (shotchartSettings.courtWidth -
             shotchartSettings.leagueSettings.threePointSideRadius * 2) /
           2,
-        y: shotchartSettings.visibleCourtLength()
-      }
-    ]
+        y: shotchartSettings.visibleCourtLength(),
+      },
+    ],
   };
 
-  let insideRbmr = globalContext.floaterXY.filter(function (i: ICourtLocation) {
+  let insideRbmr = linesContext.floaterXY.filter(function (i: ICourtLocation) {
     // change x portion to match AP
     return (
       i.y <= shotchartSettings.visibleCourtLength() &&
@@ -284,11 +295,11 @@ export function createSectionedZones(
         2,
       y:
         shotchartSettings.visibleCourtLength() -
-        shotchartSettings.leagueSettings.threePointCutOffLength
-    }
+        shotchartSettings.leagueSettings.threePointCutOffLength,
+    },
   ]);
 
-  let insideLbmr = globalContext.floaterXY.filter(function (i: ICourtLocation) {
+  let insideLbmr = linesContext.floaterXY.filter(function (i: ICourtLocation) {
     // change x portion to match AP
     return (
       i.y <= shotchartSettings.visibleCourtLength() &&
@@ -303,7 +314,7 @@ export function createSectionedZones(
   });
 
   let lbmr = {
-    className: 'shotzone left-baseline-midrange-zone',
+    className: "shotzone left-baseline-midrange-zone",
     points: insideLbmr.concat([
       {
         x:
@@ -311,7 +322,7 @@ export function createSectionedZones(
           (shotchartSettings.courtWidth -
             shotchartSettings.leagueSettings.threePointSideRadius * 2) /
             2,
-        y: shotchartSettings.visibleCourtLength()
+        y: shotchartSettings.visibleCourtLength(),
       },
       {
         x:
@@ -321,12 +332,12 @@ export function createSectionedZones(
             2,
         y:
           shotchartSettings.visibleCourtLength() -
-          shotchartSettings.leagueSettings.threePointCutOffLength
-      }
-    ])
+          shotchartSettings.leagueSettings.threePointCutOffLength,
+      },
+    ]),
   };
 
-  let insideRwmr = globalContext.floaterXY.filter(function (i: ICourtLocation) {
+  let insideRwmr = linesContext.floaterXY.filter(function (i: ICourtLocation) {
     // change x portion to match AP
     return (
       i.y < shotchartSettings.visibleCourtLength() &&
@@ -347,11 +358,11 @@ export function createSectionedZones(
   let outsideRwmr = r3Line;
 
   let rwmr = {
-    className: 'shotzone right-wing-midrange-zone',
-    points: outsideRwmr.reverse().concat(insideRwmr)
+    className: "shotzone right-wing-midrange-zone",
+    points: outsideRwmr.reverse().concat(insideRwmr),
   };
 
-  let insideLwmr = globalContext.floaterXY.filter(function (i: ICourtLocation) {
+  let insideLwmr = linesContext.floaterXY.filter(function (i: ICourtLocation) {
     // change x portion to match AP
     return (
       i.y < shotchartSettings.visibleCourtLength() &&
@@ -372,11 +383,11 @@ export function createSectionedZones(
   let outsideLwmr = l3Line;
 
   let lwmr = {
-    className: 'shotzone left-wing-midrange-zone',
-    points: outsideLwmr.concat(insideLwmr.reverse())
+    className: "shotzone left-wing-midrange-zone",
+    points: outsideLwmr.concat(insideLwmr.reverse()),
   };
 
-  let insideMmr = globalContext.floaterXY.filter(function (i: ICourtLocation) {
+  let insideMmr = linesContext.floaterXY.filter(function (i: ICourtLocation) {
     // change x portion to match AP
     return (
       i.y <
@@ -388,11 +399,11 @@ export function createSectionedZones(
   let outsideMmr = m3Line;
 
   let mmr = {
-    className: 'shotzone middle-midrange-zone',
-    points: outsideMmr.concat(insideMmr.reverse())
+    className: "shotzone middle-midrange-zone",
+    points: outsideMmr.concat(insideMmr.reverse()),
   };
 
-  let insideRf = globalContext.rimXY.filter(function (i: ICourtLocation) {
+  let insideRf = linesContext.rimXY.filter(function (i: ICourtLocation) {
     return (
       i.y >
         shotchartSettings.visibleCourtLength() -
@@ -405,11 +416,11 @@ export function createSectionedZones(
   let outsideRf = insideRbmr.concat(insideRwmr);
 
   let rf = {
-    className: 'shotzone right-floater-zone',
-    points: outsideRf.concat(insideRf.reverse())
+    className: "shotzone right-floater-zone",
+    points: outsideRf.concat(insideRf.reverse()),
   };
 
-  let insideLf = globalContext.rimXY.filter(function (i: ICourtLocation) {
+  let insideLf = linesContext.rimXY.filter(function (i: ICourtLocation) {
     return (
       i.y >
         shotchartSettings.visibleCourtLength() -
@@ -422,11 +433,11 @@ export function createSectionedZones(
   let outsideLf = insideLbmr.reverse().concat(insideLwmr);
 
   let lf = {
-    className: 'shotzone left-floater-zone',
-    points: insideLf.concat(outsideLf)
+    className: "shotzone left-floater-zone",
+    points: insideLf.concat(outsideLf),
   };
 
-  let insideMf = globalContext.rimXY.filter(function (i: ICourtLocation) {
+  let insideMf = linesContext.rimXY.filter(function (i: ICourtLocation) {
     return (
       i.y <
       shotchartSettings.visibleCourtLength() -
@@ -437,8 +448,8 @@ export function createSectionedZones(
   let outsideMf = insideMmr;
 
   let mf = {
-    className: 'shotzone middle-floater-zone',
-    points: outsideMf.concat(insideMf)
+    className: "shotzone middle-floater-zone",
+    points: outsideMf.concat(insideMf),
   };
 
   let zonePoints = {
@@ -456,116 +467,127 @@ export function createSectionedZones(
       lf: lf.points,
       rf: rf.points,
       mf: mf.points,
-      rim: globalContext.rimXY
+      rim: linesContext.rimXY,
     },
-    zones: [rc3, lc3, r3, l3, m3, rbmr, lbmr, rwmr, lwmr, mmr, lf, rf, mf]
+    zones: [rc3, lc3, r3, l3, m3, rbmr, lbmr, rwmr, lwmr, mmr, lf, rf, mf],
   };
 
   base
-    .selectAll('polygon')
+    .selectAll("polygon")
     .data(zonePoints.zones)
     .enter()
-    .append('polygon')
-    .attr('class', function (d: any): number {
+    .append("polygon")
+    .attr("class", function (d: any): number {
       return d.className + shotchartSettings.shotchartNumber;
     })
-    .attr('points', function (d: any): number {
+    .attr("points", function (d: any): number {
       return d.points
         .map(function (d: any): string {
-          return [d.x, d.y].join(',');
+          return [d.x, d.y].join(",");
         })
-        .join(' ');
+        .join(" ");
     });
 
-    if (zoneContext !== undefined) {
-      labelShotZones(shotchartSettings, base, zonePoints, zoneContext);
-
-    }
+  labelShotZones(shotchartSettings, base, zonePoints, zoneContext);
 }
 
 function labelShotZones(
   shotchartSettings: IShotchartSettings,
   base: any,
   zonePoints: IZonePoints,
-  context: IZonedShotchartContext
+  zoneContext: IZonedShotchartContext
 ) {
-  let zoneLookup: lookup = {
-    rc3: 'R-C3',
-    lc3: 'L-C3',
-    r3: 'R-ATB',
-    l3: 'L-ATB',
-    m3: 'M-ATB',
-    rbmr: 'RB-MR',
-    lbmr: 'LB-MR',
-    rwmr: 'RW-MR',
-    lwmr: 'LW-MR',
-    mmr: 'M-MR',
-    lf: 'L-FL',
-    rf: 'R-FL',
-    mf: 'M-FL',
-    rim: 'RIM'
+  let zoneLookup: lookup<ShotchartZone> = {
+    rc3: "R-C3",
+    lc3: "L-C3",
+    r3: "R-ATB",
+    l3: "L-ATB",
+    m3: "M-ATB",
+    rbmr: "RB-MR",
+    lbmr: "LB-MR",
+    rwmr: "RW-MR",
+    lwmr: "LW-MR",
+    mmr: "M-MR",
+    lf: "L-FL",
+    rf: "R-FL",
+    mf: "M-FL",
+    rim: "RIM",
   };
 
-  let zoneCSS: lookup = {
-    rc3: 'right-corner-three-zone',
-    lc3: 'left-corner-three-zone',
-    r3: 'right-three-zone',
-    l3: 'left-three-zone',
-    m3: 'middle-three-zone',
-    rbmr: 'right-baseline-midrange-zone',
-    lbmr: 'left-baseline-midrange-zone',
-    rwmr: 'right-wing-midrange-zone',
-    lwmr: 'left-wing-midrange-zone',
-    mmr: 'middle-midrange-zone',
-    lf: 'left-floater-zone',
-    rf: 'right-floater-zone',
-    mf: 'middle-floater-zone',
-    rim: 'rim-zone'
+  let zoneCSS: lookup<ShotchartZoneCSS> = {
+    rc3: "right-corner-three-zone",
+    lc3: "left-corner-three-zone",
+    r3: "right-three-zone",
+    l3: "left-three-zone",
+    m3: "middle-three-zone",
+    rbmr: "right-baseline-midrange-zone",
+    lbmr: "left-baseline-midrange-zone",
+    rwmr: "right-wing-midrange-zone",
+    lwmr: "left-wing-midrange-zone",
+    mmr: "middle-midrange-zone",
+    lf: "left-floater-zone",
+    rf: "right-floater-zone",
+    mf: "middle-floater-zone",
+    rim: "rim-zone",
   };
 
   for (let key in zoneLookup) {
-    let tempData = findShotZoneData(zoneLookup[key], context)[0];
-    tempData = tempData == null ? { fga: 0, fgm: 0, percentile: 0 } : tempData;
+    let tempData = findShotZoneData(zoneLookup[key], zoneContext)[0];
+    tempData =
+      tempData == null
+        ? { fga: 0, fgm: 0, percentile: 0, bucket: zoneLookup[key] }
+        : tempData;
     let center = findCentroid(zonePoints.labeledZones[key]);
     let prettyFormat;
 
-    if (key == 'rim') {
+    if (key == "rim") {
       prettyFormat = { top: -1.5, bottom: 3, left: 0, right: 0 };
-    } else if (key == 'mf') {
+    } else if (key == "mf") {
       prettyFormat = { top: 0, bottom: 3, left: 0, right: 0 };
     } else if (
-      key == 'lf' &&
-      shotchartSettings.leagueSettings.leagueId == 'nba'
+      key == "lf" &&
+      shotchartSettings.leagueSettings.leagueId == "nba"
     ) {
       prettyFormat = { top: 0, bottom: 2, left: 0, right: 2 };
     } else if (
-      key == 'rf' &&
-      shotchartSettings.leagueSettings.leagueId == 'nba'
+      key == "rf" &&
+      shotchartSettings.leagueSettings.leagueId == "nba"
     ) {
       prettyFormat = { top: 0, bottom: 2, left: -2, right: 0 };
     } else {
       prettyFormat = { top: 0, bottom: 2, left: 0, right: 0 };
     }
     base
-      .append('text')
-      .text(tempData.fgm + '/' + tempData.fga)
-      .attr('x', center[0] + prettyFormat.left + prettyFormat.right)
-      .attr('y', center[1] + prettyFormat.top)
-      .style('text-anchor', 'middle')
-      .attr('class', zoneCSS[key] + '-text');
+      .append("text")
+      .text(tempData.fgm + "/" + tempData.fga)
+      .attr("x", center[0] + prettyFormat.left + prettyFormat.right)
+      .attr("y", center[1] + prettyFormat.top)
+      .style("text-anchor", "middle")
+      .attr("class", zoneCSS[key] + "-text")
+      .attr(
+        "id",
+        tempData.percentile <= 15 || tempData.percentile >= 85
+          ? "light-shotchart-zone"
+          : ""
+      );
 
     base
-      .append('text')
+      .append("text")
       .text(getPrettyPercentage(tempData.fgm, tempData.fga))
-      .attr('x', center[0] + prettyFormat.left + prettyFormat.right)
-      .attr('y', center[1] + prettyFormat.bottom)
-      .style('text-anchor', 'middle')
-      .attr('class', zoneCSS[key] + '-text');
+      .attr("x", center[0] + prettyFormat.left + prettyFormat.right)
+      .attr("y", center[1] + prettyFormat.bottom)
+      .style("text-anchor", "middle")
+      .attr("class", zoneCSS[key] + "-text")
+      .attr(
+        "id",
+        tempData.percentile <= 15 || tempData.percentile >= 85
+          ? "light-shotchart-zone"
+          : ""
+      );
 
-    d3.select('.' + zoneCSS[key] + shotchartSettings.shotchartNumber).style(
-      'fill',
-      shotZoneColor(tempData.percentile)
-    );
+    d3.selectAll("." + zoneCSS[key] + shotchartSettings.shotchartNumber)
+      .style("fill", shotZoneColor(tempData.percentile))
+      .attr("id", "shotzone");
   }
 }
 
@@ -591,16 +613,19 @@ export function findCentroid(points: ICourtLocation[]): number[] {
   return [x / d, y / d];
 }
 
-export function findShotZoneData(shotzone: string, context: IZonedShotchartContext): any[] {
+export function findShotZoneData(
+  shotzone: ShotchartZone,
+  context: IZonedShotchartContext
+): IZoneData[] {
   // pass context....
-  return context.visibleShotData.filter(function (i: any) {
+  return context.visibleShotData.filter(function (i: IZoneData) {
     return i.bucket == shotzone;
   });
 }
 
 export function getPrettyPercentage(fgm: number, fga: number): string {
-  if (fga == 0) return '0%';
-  return (((fgm / fga) * 10000) / 100).toFixed(1) + '%';
+  if (fga == 0) return "0%";
+  return (((fgm / fga) * 10000) / 100).toFixed(1) + "%";
 }
 
 export function shotZoneColor(perc: number) {
@@ -613,16 +638,16 @@ export function createColorScale(): d3.ScaleLinear<string, string> {
     .scaleLinear<string>()
     .domain([0, 10, 20, 30, 40, 50, 60, 70, 80, 90, 100])
     .range([
-      '#053061',
-      '#2166ac',
-      '#4393c3',
-      '#92c5de',
-      '#d1e5f0',
-      '#fddbc7',
-      '#f4a582',
-      '#d6604d',
-      '#b2182b',
-      '#67001f'
+      "#053061",
+      "#2166ac",
+      "#4393c3",
+      "#92c5de",
+      "#d1e5f0",
+      "#fddbc7",
+      "#f4a582",
+      "#d6604d",
+      "#b2182b",
+      "#67001f",
     ]);
   return colors;
 }
@@ -630,47 +655,47 @@ export function createColorScale(): d3.ScaleLinear<string, string> {
 export function drawCourt(
   shotchartSettings: IShotchartSettings,
   node: any,
-  globalContext: IShotchartLinesContext
+  globalContext: IShotchartLinesContext,
+  zoneContext?: IZonedShotchartContext
 ) {
-  console.log(d3.select(node.current));
   let base = d3
     .select(node.current)
-    .attr('width', shotchartSettings.width)
+    .attr("width", shotchartSettings.width)
     .attr(
-      'viewBox',
-      '0 0 ' +
+      "viewBox",
+      "0 0 " +
         shotchartSettings.courtWidth +
-        ' ' +
+        " " +
         shotchartSettings.visibleCourtLength()
     )
-    .append('g')
-    .attr('class', 'shot-chart-court');
+    .append("g")
+    .attr("class", "shot-chart-court");
 
   // create paint area
   base
-    .append('rect')
-    .attr('class', 'shot-chart-court-key')
+    .append("rect")
+    .attr("class", "shot-chart-court-key")
     .attr(
-      'x',
+      "x",
       shotchartSettings.courtWidth / 2 -
         shotchartSettings.leagueSettings.keyWidth / 2
     )
     .attr(
-      'y',
+      "y",
       shotchartSettings.visibleCourtLength() -
         shotchartSettings.freeThrowLineLength
     )
-    .attr('width', shotchartSettings.leagueSettings.keyWidth)
-    .attr('height', shotchartSettings.freeThrowLineLength);
+    .attr("width", shotchartSettings.leagueSettings.keyWidth)
+    .attr("height", shotchartSettings.freeThrowLineLength);
 
   // create baseline
   base
-    .append('line')
-    .attr('class', 'shot-chart-court-baseline')
-    .attr('x1', 0)
-    .attr('y1', shotchartSettings.visibleCourtLength())
-    .attr('x2', shotchartSettings.courtWidth)
-    .attr('y2', shotchartSettings.visibleCourtLength());
+    .append("line")
+    .attr("class", "shot-chart-court-baseline")
+    .attr("x1", 0)
+    .attr("y1", shotchartSettings.visibleCourtLength())
+    .attr("x2", shotchartSettings.courtWidth)
+    .attr("y2", shotchartSettings.visibleCourtLength());
 
   // create angle for three point arc (tangent - in rads)
   let tpAngle = Math.atan(
@@ -690,42 +715,42 @@ export function drawCourt(
     shotchartSettings.visibleCourtLength() -
       shotchartSettings.basketProtrusionLength -
       shotchartSettings.basketDiameter / 2,
-    'threePointLineXY',
+    "threePointLineXY",
     globalContext
   )
-    .attr('class', 'shot-chart-court-3pt-line')
+    .attr("class", "shot-chart-court-3pt-line")
     .attr(
-      'transform',
-      'translate(' +
+      "transform",
+      "translate(" +
         shotchartSettings.courtWidth / 2 +
-        ', ' +
+        ", " +
         (shotchartSettings.visibleCourtLength() -
           shotchartSettings.basketProtrusionLength -
           shotchartSettings.basketDiameter / 2) +
-        ')'
+        ")"
     );
 
   // create three point line standout
   [1, -1].forEach(function (n) {
     base
-      .append('line')
-      .attr('class', 'shot-chart-court-3pt-line')
+      .append("line")
+      .attr("class", "shot-chart-court-3pt-line")
       .attr(
-        'x1',
+        "x1",
         shotchartSettings.courtWidth / 2 +
           shotchartSettings.leagueSettings.threePointSideRadius * n
       )
       .attr(
-        'y1',
+        "y1",
         shotchartSettings.visibleCourtLength() -
           shotchartSettings.leagueSettings.threePointCutOffLength
       )
       .attr(
-        'x2',
+        "x2",
         shotchartSettings.courtWidth / 2 +
           shotchartSettings.leagueSettings.threePointSideRadius * n
       )
-      .attr('y2', shotchartSettings.visibleCourtLength());
+      .attr("y2", shotchartSettings.visibleCourtLength());
   });
 
   // restricted circle
@@ -738,19 +763,19 @@ export function drawCourt(
     shotchartSettings.visibleCourtLength() -
       shotchartSettings.basketProtrusionLength -
       shotchartSettings.basketDiameter / 2,
-    'restrictedAreaXY',
+    "restrictedAreaXY",
     globalContext
   )
-    .attr('class', 'shot-chart-court-restricted-area')
+    .attr("class", "shot-chart-court-restricted-area")
     .attr(
-      'transform',
-      'translate(' +
+      "transform",
+      "translate(" +
         shotchartSettings.courtWidth / 2 +
-        ', ' +
+        ", " +
         (shotchartSettings.visibleCourtLength() -
           shotchartSettings.basketProtrusionLength -
           shotchartSettings.basketDiameter / 2) +
-        ')'
+        ")"
     );
 
   // create out of paint free throw circle
@@ -762,127 +787,129 @@ export function drawCourt(
     shotchartSettings.courtWidth / 2,
     shotchartSettings.visibleCourtLength() -
       shotchartSettings.freeThrowLineLength,
-    'ftOutXY',
+    "ftOutXY",
     globalContext
   )
-    .attr('class', 'shot-chart-court-ft-circle-top')
+    .attr("class", "shot-chart-court-ft-circle-top")
     .attr(
-      'transform',
-      'translate(' +
+      "transform",
+      "translate(" +
         shotchartSettings.courtWidth / 2 +
-        ', ' +
+        ", " +
         (shotchartSettings.visibleCourtLength() -
           shotchartSettings.freeThrowLineLength) +
-        ')'
+        ")"
     );
 
   // create in paint free throw circle (dashed - css)
 
-  if (shotchartSettings.leagueSettings.leagueId == 'nba') {
+  if (shotchartSettings.leagueSettings.leagueId == "nba") {
     appendArcPath(
       base,
       shotchartSettings.freeThrowCircleRadius,
       Math.PI / 2,
       1.5 * Math.PI
     )
-      .attr('class', 'shot-chart-court-ft-circle-bottom')
+      .attr("class", "shot-chart-court-ft-circle-bottom")
       .attr(
-        'transform',
-        'translate(' +
+        "transform",
+        "translate(" +
           shotchartSettings.courtWidth / 2 +
-          ', ' +
+          ", " +
           (shotchartSettings.visibleCourtLength() -
             shotchartSettings.freeThrowLineLength) +
-          ')'
+          ")"
       );
-  } else if (shotchartSettings.leagueSettings.leagueId == 'coll') {
+  } else if (shotchartSettings.leagueSettings.leagueId == "coll") {
     // lane block (college)
     base
-      .append('rect')
-      .attr('class', 'shot-chart-court-key-block')
+      .append("rect")
+      .attr("class", "shot-chart-court-key-block")
       .attr(
-        'x',
+        "x",
         shotchartSettings.courtWidth / 2 -
           shotchartSettings.leagueSettings.keyWidth / 2 -
           0.66
       )
-      .attr('y', shotchartSettings.visibleCourtLength() - 7)
-      .attr('width', 0.66)
-      .attr('height', 1)
-      .style('fill', 'black');
+      .attr("y", shotchartSettings.visibleCourtLength() - 7)
+      .attr("width", 0.66)
+      .attr("height", 1)
+      .style("fill", "black");
 
     base
-      .append('rect')
-      .attr('class', 'shot-chart-court-key-block')
+      .append("rect")
+      .attr("class", "shot-chart-court-key-block")
       .attr(
-        'x',
+        "x",
         shotchartSettings.courtWidth / 2 +
           shotchartSettings.leagueSettings.keyWidth / 2
       )
-      .attr('y', shotchartSettings.visibleCourtLength() - 7)
-      .attr('width', 0.66)
-      .attr('height', 1)
-      .style('fill', 'black');
+      .attr("y", shotchartSettings.visibleCourtLength() - 7)
+      .attr("width", 0.66)
+      .attr("height", 1)
+      .style("fill", "black");
   }
 
   // box marks for key
   shotchartSettings.leagueSettings.keyMarks.forEach(function (mark) {
     [1, -1].forEach(function (n) {
       base
-        .append('line')
-        .attr('class', 'shot-chart-court-key-mark')
+        .append("line")
+        .attr("class", "shot-chart-court-key-mark")
         .attr(
-          'x1',
+          "x1",
           shotchartSettings.courtWidth / 2 +
             (shotchartSettings.leagueSettings.keyWidth / 2) * n +
             shotchartSettings.keyMarkWidth * n
         )
-        .attr('y1', shotchartSettings.visibleCourtLength() - mark)
+        .attr("y1", shotchartSettings.visibleCourtLength() - mark)
         .attr(
-          'x2',
+          "x2",
           shotchartSettings.courtWidth / 2 +
             (shotchartSettings.leagueSettings.keyWidth / 2) * n
         )
-        .attr('y2', shotchartSettings.visibleCourtLength() - mark);
+        .attr("y2", shotchartSettings.visibleCourtLength() - mark);
     });
   });
 
   // create backboard
   base
-    .append('line')
-    .attr('class', 'shot-chart-court-backboard')
+    .append("line")
+    .attr("class", "shot-chart-court-backboard")
     .attr(
-      'x1',
+      "x1",
       shotchartSettings.courtWidth / 2 - shotchartSettings.basketWidth / 2
     )
     .attr(
-      'y1',
+      "y1",
       shotchartSettings.visibleCourtLength() -
         shotchartSettings.basketProtrusionLength
     )
     .attr(
-      'x2',
+      "x2",
       shotchartSettings.courtWidth / 2 + shotchartSettings.basketWidth / 2
     )
     .attr(
-      'y2',
+      "y2",
       shotchartSettings.visibleCourtLength() -
         shotchartSettings.basketProtrusionLength
     );
 
   // create rim
   base
-    .append('circle')
-    .attr('class', 'shot-chart-court-hoop')
-    .attr('cx', shotchartSettings.courtWidth / 2)
+    .append("circle")
+    .attr("class", "shot-chart-court-hoop")
+    .attr("cx", shotchartSettings.courtWidth / 2)
     .attr(
-      'cy',
+      "cy",
       shotchartSettings.visibleCourtLength() -
         shotchartSettings.basketProtrusionLength -
         shotchartSettings.basketDiameter / 2
     )
-    .attr('r', shotchartSettings.basketDiameter / 2);
+    .attr("r", shotchartSettings.basketDiameter / 2);
   // create outside line for floater range
 
-  //createSectionedZones(shotchartSettings, base);
+  if (zoneContext !== undefined) {
+    createSectionedZones(shotchartSettings, base, globalContext, zoneContext);
+  }
 }
