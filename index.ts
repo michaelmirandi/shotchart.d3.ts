@@ -1,3 +1,4 @@
+
 export { Shotchart } from "./src/shotcharts/Shotchart";
 export { ZonedShotchart } from "./src/shotcharts/ZonedShotchart";
 export {
@@ -13,4 +14,6 @@ export {
   COLL_SETTINGS,
   NBA_SETTINGS,
 } from "./src/utilities/Constants";
+export { zonedShotchartData } from "./src/data/ZonedShotchart";
+
 export * from "./src/utilities/Context";

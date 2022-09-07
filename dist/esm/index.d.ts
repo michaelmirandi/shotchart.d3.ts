@@ -4,4 +4,5 @@ export { drawCourt, createSectionedZones, getPrettyPercentage, createColorScale,
 export * from "./src/utilities/Interfaces";
 export type { lookup } from "./src/utilities/Types";
 export { SHOTCHART_SETTINGS, COLL_SETTINGS, NBA_SETTINGS, } from "./src/utilities/Constants";
+export { zonedShotchartData } from "./src/data/ZonedShotchart";
 export * from "./src/utilities/Context";

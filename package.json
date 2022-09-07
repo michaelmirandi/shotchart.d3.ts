@@ -1,6 +1,6 @@
 {
   "name": "shotchart.d3.ts",
-  "version": "0.0.6",
+  "version": "0.0.7",
   "description": "Implementation of a blank shotchart utilizing D3, React, & Typescript.",
   "main": "dist/cjs/index.js",
   "module": "dist/esm/index.js",
