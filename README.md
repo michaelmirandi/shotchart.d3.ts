@@ -11,7 +11,7 @@ npm i shotchart.d3.ts
 ## Usage
 
 ### Zoned NBA Shotchart
-```javascript
+```typescript
 import * as React from 'react';
 import {
   SHOTCHART_SETTINGS,
@@ -29,7 +29,7 @@ const ZonedNbaShotchartExample: React.FC = () => {
 ```
 
 ### Zoned College Shotchart
-```javascript
+```typescript
 import * as React from 'react';
 import {
   SHOTCHART_SETTINGS,
