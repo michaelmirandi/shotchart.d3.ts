@@ -1,4 +1,3 @@
-
 export { Shotchart } from "./src/shotcharts/Shotchart";
 export { ZonedShotchart } from "./src/shotcharts/ZonedShotchart";
 export {
