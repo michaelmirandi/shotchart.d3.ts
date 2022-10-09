@@ -1,7 +1,7 @@
 /* shotchart */
 
 #shotzone {
-  fill-opacity: .7;
+  fill-opacity: 0.7;
 }
 
 .shot-chart-court * {
@@ -27,7 +27,7 @@
 .shotzone {
   stroke: black;
   stroke-width: 0.08;
-  stroke-opacity: .9;
+  stroke-opacity: 0.9;
   z-index: 10000;
 }
 

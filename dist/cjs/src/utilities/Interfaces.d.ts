@@ -3,6 +3,7 @@ export interface ICourtLocation {
     x: number;
     y: number;
 }
+export declare type ThemeType = "B/O" | "R/G";
 export interface ILeagueSettings {
     leagueId: string;
     keyWidth: number;
@@ -38,6 +39,7 @@ export interface IShotchartSettings {
 }
 export interface IShotchart {
     chartSettings: IShotchartSettings;
+    theme?: ThemeType;
 }
 export interface IZonedShotchart extends IShotchart {
     data: IZoneData[];

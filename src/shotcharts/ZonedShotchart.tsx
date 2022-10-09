@@ -21,6 +21,8 @@ export const ZonedShotchart: React.FC<IZonedShotchart> = (props) => {
   );
   const containerRef = React.useRef();
   React.useEffect(() => {
+    let svg = document.getElementById("shotchart-container");
+    if (svg) svg.innerHTML = "";
     drawCourt(
       props.chartSettings,
       containerRef,
