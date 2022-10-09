@@ -10,7 +10,7 @@ export const redGreenTheme: string[] = [
   "#529952",
   "#298633",
   "#007c21",
-].reverse();
+];
 
 export const orangeBlueTheme: string[] = [
   "#5399fa",
@@ -24,7 +24,7 @@ export const orangeBlueTheme: string[] = [
   "#ffcf8e",
   "#ffa733",
   "#ff9100",
-].reverse();
+];
 
 export const percentileText = (data: number) =>
   data <= 15 || data >= 85 ? "light-shotchart-zone"
