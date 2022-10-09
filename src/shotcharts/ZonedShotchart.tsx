@@ -21,7 +21,7 @@ export const ZonedShotchart: React.FC<IZonedShotchart> = (props) => {
   );
   const containerRef = React.useRef();
   React.useEffect(() => {
-    let svg = document.getElementById("shotchart-container");
+    let svg = document.getElementById(`shotchart-container-${props.chartSettings.shotchartNumber}`);
     if (svg) svg.innerHTML = "";
     drawCourt(
       props.chartSettings,
@@ -39,6 +39,6 @@ export const ZonedShotchart: React.FC<IZonedShotchart> = (props) => {
   React.useEffect(() => {}, [props.data]);
   return (
     // @ts-ignore
-    <svg ref={containerRef} width="100%" id="shotchart-container"></svg>
+    <svg ref={containerRef} width="100%" id={`shotchart-container-${props.chartSettings.shotchartNumber}`}></svg>
   );
 };

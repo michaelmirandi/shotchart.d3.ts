@@ -25,3 +25,11 @@ export const orangeBlueTheme: string[] = [
   "#ffa733",
   "#ff9100",
 ].reverse();
+
+export const percentileText = (data: number) =>
+  data <= 15 || data >= 85 ? "light-shotchart-zone"
+  : "";
+
+  export const percentileTextBlueOrange = (data: number) =>
+  data <= 10 ? "light-shotchart-zone"
+          : "";

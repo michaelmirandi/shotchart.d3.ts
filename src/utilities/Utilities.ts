@@ -7,6 +7,7 @@ import {
   IZonedShotchartContext,
   IZoneData,
 } from "./Interfaces";
+import { percentileText, percentileTextBlueOrange, redGreenTheme } from "./Themes";
 import { lookup, ShotchartZone, ShotchartZoneCSS } from "./Types";
 
 export function appendArcPath(
@@ -582,9 +583,7 @@ function labelShotZones(
       .attr("class", zoneCSS[key] + "-text")
       .attr(
         "id",
-        tempData.percentile <= 15 || tempData.percentile >= 85
-          ? "light-shotchart-zone"
-          : ""
+        theme === redGreenTheme ? percentileText(tempData.percentile) : percentileTextBlueOrange(tempData.percentile)
       );
 
     d3.selectAll("." + zoneCSS[key] + shotchartSettings.shotchartNumber)
