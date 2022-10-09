@@ -57,7 +57,8 @@ export function createSectionedZones(
   shotchartSettings: IShotchartSettings,
   base: any,
   linesContext: IShotchartLinesContext,
-  zoneContext: IZonedShotchartContext
+  zoneContext: IZonedShotchartContext,
+  theme: string[]
 ): void {
   // create outside line for rim range
   // fill based on the circle. This is not a polygon like the other shapes on the visualization
@@ -488,14 +489,15 @@ export function createSectionedZones(
         .join(" ");
     });
 
-  labelShotZones(shotchartSettings, base, zonePoints, zoneContext);
+  labelShotZones(shotchartSettings, base, zonePoints, zoneContext, theme);
 }
 
 function labelShotZones(
   shotchartSettings: IShotchartSettings,
   base: any,
   zonePoints: IZonePoints,
-  zoneContext: IZonedShotchartContext
+  zoneContext: IZonedShotchartContext,
+  theme: string[]
 ) {
   let zoneLookup: lookup<ShotchartZone> = {
     rc3: "R-C3",
@@ -586,7 +588,7 @@ function labelShotZones(
       );
 
     d3.selectAll("." + zoneCSS[key] + shotchartSettings.shotchartNumber)
-      .style("fill", shotZoneColor(tempData.percentile))
+      .style("fill", shotZoneColor(tempData.percentile, theme))
       .attr("id", "shotzone");
   }
 }
@@ -628,27 +630,18 @@ export function getPrettyPercentage(fgm: number, fga: number): string {
   return (((fgm / fga) * 10000) / 100).toFixed(1) + "%";
 }
 
-export function shotZoneColor(perc: number) {
-  let colors = createColorScale();
+export function shotZoneColor(perc: number, theme: string[]) {
+  let colors = createColorScale(theme);
   return colors(perc);
 }
 
-export function createColorScale(): d3.ScaleLinear<string, string> {
+export function createColorScale(
+  theme: string[]
+): d3.ScaleLinear<string, string> {
   let colors = d3
     .scaleLinear<string>()
     .domain([0, 10, 20, 30, 40, 50, 60, 70, 80, 90, 100])
-    .range([
-      "#053061",
-      "#2166ac",
-      "#4393c3",
-      "#92c5de",
-      "#d1e5f0",
-      "#fddbc7",
-      "#f4a582",
-      "#d6604d",
-      "#b2182b",
-      "#67001f",
-    ]);
+    .range(theme);
   return colors;
 }
 
@@ -656,6 +649,8 @@ export function drawCourt(
   shotchartSettings: IShotchartSettings,
   node: any,
   globalContext: IShotchartLinesContext,
+  theme: string[],
+
   zoneContext?: IZonedShotchartContext
 ) {
   let base = d3
@@ -910,6 +905,12 @@ export function drawCourt(
   // create outside line for floater range
 
   if (zoneContext !== undefined) {
-    createSectionedZones(shotchartSettings, base, globalContext, zoneContext);
+    createSectionedZones(
+      shotchartSettings,
+      base,
+      globalContext,
+      zoneContext,
+      theme
+    );
   }
 }
