@@ -1,6 +1,6 @@
 {
   "name": "shotchart.d3.ts",
-  "version": "0.1.0",
+  "version": "0.1.1",
   "description": "A package offering easy to use React shotcharts. Collegiate & NBA court dimensions are currently supported. Dependencies are React & D3.",
   "main": "dist/cjs/index.js",
   "module": "dist/esm/index.js",

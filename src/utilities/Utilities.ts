@@ -569,9 +569,7 @@ function labelShotZones(
       .attr("class", zoneCSS[key] + "-text")
       .attr(
         "id",
-        tempData.percentile <= 15 || tempData.percentile >= 85
-          ? "light-shotchart-zone"
-          : ""
+        theme === redGreenTheme ? percentileText(tempData.percentile) : percentileTextBlueOrange(tempData.percentile)
       );
 
     base
