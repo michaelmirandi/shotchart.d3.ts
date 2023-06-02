@@ -17,18 +17,18 @@ The codebase is structured as follows:
 - lib/: Hosts various resources, including example data, interfaces, constants, and utility functions, that are used across to render the components.
 - utilities/: Contains utility functions and types that are used in the project. This includes utilities specifically for building the storybook.
 
-# Installation
+## Installation
 ```bash
 npm install shotchart.d3.ts
 ```
 
-# Usage
+## Usage
 
-## `Halfcourt` Component
+### `Halfcourt` Component
 
 The `Halfcourt` component is a functional React component that displays an interactive, SVG-based halfcourt basketball diagram.
 
-### Importing the Component
+#### Importing the Component
 
 Firstly, import the `Halfcourt` component in your file:
 
@@ -36,7 +36,7 @@ Firstly, import the `Halfcourt` component in your file:
 import { Halfcourt } from "shotchart.d3.ts";
 ```
 
-### Component Props
+#### Component Props
 
 The `Halfcourt` component takes in two props: `id` and `courtType`. 
 
@@ -49,17 +49,17 @@ Here's an example of how to use the `Halfcourt` component:
 <Halfcourt id={1} courtType="NBA" />
 ```
 
-### How It Works
+#### How It Works
 
 On component mount and whenever the `courtType` prop changes, the `Halfcourt` component will first clear any existing SVG with the same `id`. It then calculates the settings for the court diagram based on the `courtType` prop (using either `NBA_SETTINGS` or `COLL_SETTINGS`), and then calls `drawCourt()` to draw the court lines on a new SVG element. 
 
 The `Halfcourt` component renders an SVG element with a width of 100% and an `id` based on the `id` prop. The SVG element has a `ref` attached to it, which is used to manipulate its contents in the `useEffect` hook.
 
-## `ZonedShotchart` Component
+### `ZonedShotchart` Component
 
 The `ZonedShotchart` component is a robust visualization tool that renders a basketball shot chart in React. It offers an interactive visual display of different shooting zones on a basketball court, with an ability to customize the color theme and adjust to different court types. 
 
-### Importing the Component
+#### Importing the Component
 
 To use the `ZonedShotchart` component in your project, import it as follows:
 
@@ -69,7 +69,7 @@ import { ZonedShotchart } from "shotchart.d3.ts";
 
 The component depends on several utilities and constants which should be present in the relative paths provided in the import statements. Make sure these dependencies are available in your project.
 
-### Component Props
+#### Component Props
 
 `ZonedShotchart` expects the following props:
 
@@ -95,7 +95,7 @@ Here's an example of how to use the `ZonedShotchart` component with props:
 />
 ```
 
-### How it works
+#### How it works
 
 Upon mounting, the `ZonedShotchart` component creates a shot chart by drawing the court lines and base with the `drawCourt()` function. It then creates different shot zones using `createSectionedZones()`, and labels the shot zones based on the provided `props.data` using `labelShotZones()`. 
 
