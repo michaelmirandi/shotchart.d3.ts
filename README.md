@@ -180,8 +180,6 @@ You should also have basic knowledge of React, TypeScript, Storybook, and Rollup
 
 ## Upcoming Features
 
-Absolutely, here's a more condensed version:
-
 1. **Individual Shot Shotchart**: Visualize every shot as a single point.
 
 2. **Hexbin Shotchart**: Group shots into hexagonal "bins" for a clearer view of shooting patterns and hotspots. 
