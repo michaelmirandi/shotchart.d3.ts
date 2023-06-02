@@ -1,0 +1,12 @@
+import * as d3 from 'd3';
+import { IShotchartSettings, ICourtLocation } from "../halfcourt/Interfaces";
+import { ShotchartBackgroundTheme } from "../halfcourt/Types";
+import { ICourtLines, IZoneData, IZonePoints } from "./Interfaces";
+import { ShotchartZone } from "./Types";
+export declare function createSectionedZones(shotchartSettings: IShotchartSettings, base: any, courtLines: ICourtLines): IZonePoints;
+export declare function findCentroid(points: ICourtLocation[]): number[];
+export declare function findShotZoneData(shotzone: ShotchartZone, data: IZoneData[]): IZoneData[];
+export declare function getPrettyPercentage(fgm: number, fga: number): string;
+export declare function shotZoneColor(perc: number, theme: string[]): string;
+export declare function createColorScale(theme: string[]): d3.ScaleLinear<string, string>;
+export declare function labelShotZones(shotchartSettings: IShotchartSettings, base: any, zonePoints: IZonePoints, data: IZoneData[], theme: string[], backgroundTheme: ShotchartBackgroundTheme): void;

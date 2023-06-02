@@ -12,6 +12,8 @@ body {
   fill-opacity: 0.7;
 }
 
+
+
 .shot-chart-court * {
   fill: transparent;
   stroke: #333333;
@@ -64,6 +66,11 @@ text {
 }
 
 #light-shotchart-zone {
+  fill: white !important;
+  stroke: white !important;
+}
+
+#dark-empty-shot-zone {
   fill: white !important;
   stroke: white !important;
 }

@@ -43,11 +43,9 @@ export interface IShotchartSettings {
   shotchartNumber: number;
 }
 
-export interface IShotchart {
+export interface ICourt {
   id: number;
   courtType: CourtType;
-  theme: ThemeType;
-  backgroundTheme: ShotchartBackgroundTheme;
 }
 
 export interface IDrawCourt {

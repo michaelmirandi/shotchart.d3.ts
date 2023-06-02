@@ -21,8 +21,8 @@ const Template: StoryFn<typeof ZonedShotchart> = (args) => (
   </Box>
 );
 
-export const Red_Green = Template.bind({});
-Red_Green.args = {
+export const Red_Green_Style = Template.bind({});
+Red_Green_Style.args = {
   data: exampleZonedShotchartData,
   id: getSalt(),
   courtType: "NBA",
@@ -30,8 +30,8 @@ Red_Green.args = {
   backgroundTheme: "Light",
 };
 
-export const Blue_Orange = Template.bind({});
-Blue_Orange.args = {
+export const Blue_Orange_Style = Template.bind({});
+Blue_Orange_Style.args = {
   data: exampleZonedShotchartData,
   id: getSalt(),
   courtType: "NBA",

@@ -1,4 +1,3 @@
-import resolve from "@rollup/plugin-node-resolve";
 import commonjs from "@rollup/plugin-commonjs";
 import typescript from "@rollup/plugin-typescript";
 import { terser } from "rollup-plugin-terser";
@@ -6,6 +5,7 @@ import peerDepsExternal from "rollup-plugin-peer-deps-external";
 import css from "rollup-plugin-import-css";
 
 const packageJson = require("./package.json");
+const { nodeResolve } = require('@rollup/plugin-node-resolve');
 
 export default [
   {
@@ -28,7 +28,7 @@ export default [
     ],
     plugins: [
       peerDepsExternal(),
-      resolve(),
+      nodeResolve(),
       commonjs(),
       typescript({ tsconfig: "./tsconfig.json" }),
       terser(),
