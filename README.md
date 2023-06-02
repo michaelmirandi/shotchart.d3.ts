@@ -104,3 +104,86 @@ The shot chart colors and the background theme are determined by `props.theme` a
 This process is also triggered whenever `props.theme`, `props.backgroundTheme`, `props.data`, or `props.courtType` changes, ensuring the component remains up-to-date with any prop updates.
 
 The `ZonedShotchart` component renders an SVG element with a width of 100% and an id based on `props.id`. The SVG element has a `ref` attached to it, which is used to manipulate its contents in the `useEffect` hook.
+
+## Contributing to the Repository
+
+### Prerequisites
+
+Before you begin, make sure you have the following software installed on your local machine:
+
+- [Node.js](https://nodejs.org/) (version 12 or above) and npm (version 6 or above)
+- [Git](https://git-scm.com/)
+- A text editor such as [VS Code](https://code.visualstudio.com/)
+
+You should also have basic knowledge of React, TypeScript, Storybook, and Rollup.
+
+### Getting Started
+
+1. **Fork the repository.** Start by forking the repository to your GitHub account. You can do this by clicking the "Fork" button in the top right corner of the repository page.
+
+2. **Clone the repository.** After forking, clone the repository to your local machine by running:
+
+    ```
+    git clone https://github.com/michaelmirandi/shotchart.d3.ts
+    ```
+
+3. **Install the dependencies.** Navigate into the cloned repository and install the necessary dependencies using npm:
+
+    ```
+    cd shotchart.d3.ts
+    npm install
+    ```
+
+### Making Changes
+
+1. **Create a branch.** Always create a new branch for your changes. Do not make changes directly on the main branch. You can create a new branch with:
+
+    ```
+    git checkout -b <branch-name>
+    ```
+
+2. **Write your code.** Make the necessary changes or additions to the code. Make sure your code adheres to the existing style guide and conventions. Remember to follow best practices for React and TypeScript programming.
+
+3. **Check the Storybook.** If you have added or changed any components, make sure they are properly documented in the Storybook. You can run the Storybook locally with:
+
+    ```
+    npm run storybook
+    ```
+
+4. **Build the project.** Ensure that the project builds without errors. You can build the project using Rollup with the following command:
+
+    ```
+    npm run build
+    ```
+
+5. **Commit your changes.** After you have confirmed everything works, commit your changes. Please follow good commit message practices to ensure clear understanding of changes:
+
+    ```
+    git commit -m "Your detailed commit message"
+    ```
+
+### Submitting Changes
+
+1. **Push your changes.** Push your changes to your forked repository:
+
+    ```
+    git push origin <branch-name>
+    ```
+
+2. **Create a Pull Request.** Go to your forked repository on GitHub and click on "New Pull Request". Select your branch from the dropdown and submit your pull request with a meaningful title and a detailed description of your changes.
+
+### Additional Guidelines
+
+- Please ensure your code is clean, efficient, and well-documented.
+- If you're working on a large feature, consider breaking it down into smaller, manageable pull requests.
+- If you're fixing a bug, please provide detailed steps to reproduce the bug in the pull request description.
+
+## Upcoming Features
+
+Absolutely, here's a more condensed version:
+
+1. **Individual Shot Shotchart**: Visualize every shot as a single point.
+
+2. **Hexbin Shotchart**: Group shots into hexagonal "bins" for a clearer view of shooting patterns and hotspots. 
+
+3. **Full-court charts with interactive players**: With player tracking data, this feature provides a dynamic, full-court visualization including player icons with additional information.
