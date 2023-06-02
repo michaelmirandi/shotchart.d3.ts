@@ -12,10 +12,10 @@ With a focus on user-friendliness, extensibility, and customization, this librar
 
 The codebase is structured as follows:
 
-components/: Houses the React components that are used to visualize the basketball court and shot charts.
-css/: Contains CSS files that are used for styling the basketball court and shot zones.
-lib/: Hosts various resources, including example data, interfaces, constants, and utility functions, that are used across to render the components.
-utilities/: Contains utility functions and types that are used in the project. This includes utilities specifically for building the storybook.
+- components/: Houses the React components that are used to visualize the basketball court and shot charts.
+- css/: Contains CSS files that are used for styling the basketball court and shot zones.
+- lib/: Hosts various resources, including example data, interfaces, constants, and utility functions, that are used across to render the components.
+- utilities/: Contains utility functions and types that are used in the project. This includes utilities specifically for building the storybook.
 
 # Installation
 ```bash
