@@ -7,7 +7,12 @@
   "scripts": {
     "test": "npm test",
     "build": "rollup -c",
-    "lint": "npx prettier --write ."
+    "lint": "npx prettier --write .",
+    "storybook": "storybook dev",
+    "build-storybook": "storybook build"
+  },
+  "resolutions": {
+    "d3-color": "3.1.0"
   },
   "repository": {
     "type": "git",
@@ -25,19 +30,39 @@
   },
   "homepage": "https://github.com/michaelmirandi/shotchart.d3.ts#readme",
   "devDependencies": {
+    "@babel/core": "^7.22.1",
+    "@babel/preset-env": "^7.22.4",
+    "@babel/preset-react": "^7.22.3",
+    "@babel/preset-typescript": "^7.21.5",
     "@rollup/plugin-commonjs": "^22.0.2",
     "@rollup/plugin-node-resolve": "^13.3.0",
     "@rollup/plugin-typescript": "^8.3.4",
+    "@storybook/addon-actions": "^7.0.18",
+    "@storybook/addon-essentials": "^7.0.18",
+    "@storybook/addon-interactions": "^7.0.18",
+    "@storybook/addon-links": "^7.0.18",
+    "@storybook/addon-mdx-gfm": "^7.0.18",
+    "@storybook/react": "^7.0.18",
+    "@storybook/react-webpack5": "^7.0.18",
+    "@storybook/testing-library": "^0.1.0",
+    "@types/d3": "^7.4.0",
     "@types/react": "^17.0.43",
-    "react": "^17.0.2",
+    "babel-loader": "^8.3.0",
+    "react": "^18.2.0",
     "rollup-plugin-dts": "^4.2.2",
     "rollup-plugin-ignore": "^1.0.10",
     "rollup-plugin-peer-deps-external": "^2.2.4",
     "rollup-plugin-terser": "^7.0.2",
+    "storybook": "^7.0.18",
     "typescript": "^4.6.3"
   },
   "dependencies": {
+    "@emotion/react": "^11.11.0",
+    "@emotion/styled": "^11.11.0",
+    "@mui/material": "^5.13.3",
     "d3": "^7.3.0",
-    "rollup-plugin-import-css": "^3.0.3"
+    "react-dom": "^18.2.0",
+    "rollup-plugin-import-css": "^3.0.3",
+    "webpack": "^5.85.0"
   }
 }
