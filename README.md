@@ -18,6 +18,7 @@ The codebase is structured as follows:
 - utilities/: Contains utility functions and types that are used in the project. This includes utilities specifically for building the storybook.
 
 ## Installation
+
 ```bash
 npm install shotchart.d3.ts
 ```
@@ -38,9 +39,9 @@ import { Halfcourt } from "shotchart.d3.ts";
 
 #### Component Props
 
-The `Halfcourt` component takes in two props: `id` and `courtType`. 
+The `Halfcourt` component takes in two props: `id` and `courtType`.
 
-- `id` is a unique identifier (number) for the halfcourt diagram. 
+- `id` is a unique identifier (number) for the halfcourt diagram.
 - `courtType` is a string that specifies the type of the basketball court. It can either be `"NBA"` or `"COLL"`.
 
 Here's an example of how to use the `Halfcourt` component:
@@ -51,13 +52,13 @@ Here's an example of how to use the `Halfcourt` component:
 
 #### How It Works
 
-On component mount and whenever the `courtType` prop changes, the `Halfcourt` component will first clear any existing SVG with the same `id`. It then calculates the settings for the court diagram based on the `courtType` prop (using either `NBA_SETTINGS` or `COLL_SETTINGS`), and then calls `drawCourt()` to draw the court lines on a new SVG element. 
+On component mount and whenever the `courtType` prop changes, the `Halfcourt` component will first clear any existing SVG with the same `id`. It then calculates the settings for the court diagram based on the `courtType` prop (using either `NBA_SETTINGS` or `COLL_SETTINGS`), and then calls `drawCourt()` to draw the court lines on a new SVG element.
 
 The `Halfcourt` component renders an SVG element with a width of 100% and an `id` based on the `id` prop. The SVG element has a `ref` attached to it, which is used to manipulate its contents in the `useEffect` hook.
 
 ### `ZonedShotchart` Component
 
-The `ZonedShotchart` component is a robust visualization tool that renders a basketball shot chart in React. It offers an interactive visual display of different shooting zones on a basketball court, with an ability to customize the color theme and adjust to different court types. 
+The `ZonedShotchart` component is a robust visualization tool that renders a basketball shot chart in React. It offers an interactive visual display of different shooting zones on a basketball court, with an ability to customize the color theme and adjust to different court types.
 
 #### Importing the Component
 
@@ -97,7 +98,7 @@ Here's an example of how to use the `ZonedShotchart` component with props:
 
 #### How it works
 
-Upon mounting, the `ZonedShotchart` component creates a shot chart by drawing the court lines and base with the `drawCourt()` function. It then creates different shot zones using `createSectionedZones()`, and labels the shot zones based on the provided `props.data` using `labelShotZones()`. 
+Upon mounting, the `ZonedShotchart` component creates a shot chart by drawing the court lines and base with the `drawCourt()` function. It then creates different shot zones using `createSectionedZones()`, and labels the shot zones based on the provided `props.data` using `labelShotZones()`.
 
 The shot chart colors and the background theme are determined by `props.theme` and `props.backgroundTheme`, respectively. The court size and dimensions are determined by `props.courtType`, which offers settings for both NBA and college courts.
 
@@ -123,52 +124,52 @@ You should also have basic knowledge of React, TypeScript, Storybook, and Rollup
 
 2. **Clone the repository.** After forking, clone the repository to your local machine by running:
 
-    ```
-    git clone https://github.com/michaelmirandi/shotchart.d3.ts
-    ```
+   ```
+   git clone https://github.com/michaelmirandi/shotchart.d3.ts
+   ```
 
 3. **Install the dependencies.** Navigate into the cloned repository and install the necessary dependencies using npm:
 
-    ```
-    cd shotchart.d3.ts
-    npm install
-    ```
+   ```
+   cd shotchart.d3.ts
+   npm install
+   ```
 
 ### Making Changes
 
 1. **Create a branch.** Always create a new branch for your changes. Do not make changes directly on the main branch. You can create a new branch with:
 
-    ```
-    git checkout -b <branch-name>
-    ```
+   ```
+   git checkout -b <branch-name>
+   ```
 
 2. **Write your code.** Make the necessary changes or additions to the code. Make sure your code adheres to the existing style guide and conventions. Remember to follow best practices for React and TypeScript programming.
 
 3. **Check the Storybook.** If you have added or changed any components, make sure they are properly documented in the Storybook. You can run the Storybook locally with:
 
-    ```
-    npm run storybook
-    ```
+   ```
+   npm run storybook
+   ```
 
 4. **Build the project.** Ensure that the project builds without errors. You can build the project using Rollup with the following command:
 
-    ```
-    npm run build
-    ```
+   ```
+   npm run build
+   ```
 
 5. **Commit your changes.** After you have confirmed everything works, commit your changes. Please follow good commit message practices to ensure clear understanding of changes:
 
-    ```
-    git commit -m "Your detailed commit message"
-    ```
+   ```
+   git commit -m "Your detailed commit message"
+   ```
 
 ### Submitting Changes
 
 1. **Push your changes.** Push your changes to your forked repository:
 
-    ```
-    git push origin <branch-name>
-    ```
+   ```
+   git push origin <branch-name>
+   ```
 
 2. **Create a Pull Request.** Go to your forked repository on GitHub and click on "New Pull Request". Select your branch from the dropdown and submit your pull request with a meaningful title and a detailed description of your changes.
 
@@ -182,6 +183,6 @@ You should also have basic knowledge of React, TypeScript, Storybook, and Rollup
 
 1. **Individual Shot Shotchart**: Visualize every shot as a single point.
 
-2. **Hexbin Shotchart**: Group shots into hexagonal "bins" for a clearer view of shooting patterns and hotspots. 
+2. **Hexbin Shotchart**: Group shots into hexagonal "bins" for a clearer view of shooting patterns and hotspots.
 
 3. **Full-court charts with interactive players**: With player tracking data, this feature provides a dynamic, full-court visualization including player icons with additional information.

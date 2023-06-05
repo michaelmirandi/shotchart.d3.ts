@@ -42,12 +42,11 @@ The component renders an SVG element with a width of 100% and an id based on `pr
 export const ZonedShotchart: React.FC<IZonedShotchart> = (props) => {
   const containerRef = React.useRef<SVGSVGElement | null>(null);
 
-  const id = `shotchart-${props.id}`
+  const id = `shotchart-${props.id}`;
 
   React.useEffect(() => {
     if (containerRef.current) {
       let svg = document.getElementById(id);
-      console.log(`shotchart-${props.id}`)
       if (svg) svg.innerHTML = "";
       const selectedTheme = props.theme
         ? props.theme === "B/O"
@@ -58,12 +57,8 @@ export const ZonedShotchart: React.FC<IZonedShotchart> = (props) => {
         props.courtType === "NBA" ? NBA_SETTINGS : COLL_SETTINGS,
         props.id
       );
-      const {courtLines, base} = drawCourt(chartSettings, containerRef);
-      const zonePoints = createSectionedZones(
-        chartSettings,
-        base,
-        courtLines
-      );
+      const { courtLines, base } = drawCourt(chartSettings, containerRef);
+      const zonePoints = createSectionedZones(chartSettings, base, courtLines);
       labelShotZones(
         chartSettings,
         base,
@@ -73,14 +68,13 @@ export const ZonedShotchart: React.FC<IZonedShotchart> = (props) => {
         props.backgroundTheme
       );
     }
+  }, [
+    props.theme,
+    props.backgroundTheme,
+    props.data,
+    props.courtType,
+    containerRef,
+  ]);
 
-  }, [props.theme, props.backgroundTheme, props.data, props.courtType, containerRef]);
-
-  return (
-    <svg
-      ref={containerRef}
-      width="100%"
-      id={id}
-    ></svg>
-  );
+  return <svg ref={containerRef} width="100%" id={id}></svg>;
 };

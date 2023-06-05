@@ -1,4 +1,4 @@
-import * as d3 from 'd3'
+import * as d3 from "d3";
 import { lookup } from "../../utilities/Types";
 import { IShotchartSettings, ICourtLocation } from "../halfcourt/Interfaces";
 import {
@@ -16,7 +16,6 @@ export function createSectionedZones(
   base: any,
   courtLines: ICourtLines
 ): IZonePoints {
-
   appendArcPath(
     base,
     shotchartSettings.rimRange,
@@ -422,7 +421,6 @@ export function createSectionedZones(
     zones: [rc3, lc3, r3, l3, m3, rbmr, lbmr, rwmr, lwmr, mmr, lf, rf, mf],
   };
 
-  
   base
     .selectAll("polygon")
     .data(zonePoints.zones)
@@ -562,6 +560,7 @@ export function labelShotZones(
     } else {
       prettyFormat = { top: 0, bottom: 2, left: 0, right: 0 };
     }
+
     base
       .append("text")
       .text(tempData.fgm + "/" + tempData.fga)

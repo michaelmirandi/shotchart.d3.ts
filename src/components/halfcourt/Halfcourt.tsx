@@ -1,6 +1,10 @@
 import * as React from "react";
 import { ICourt } from "../../lib/halfcourt/Interfaces";
-import { SHOTCHART_SETTINGS, NBA_SETTINGS, COLL_SETTINGS } from "../../lib/halfcourt/Constants";
+import {
+  SHOTCHART_SETTINGS,
+  NBA_SETTINGS,
+  COLL_SETTINGS,
+} from "../../lib/halfcourt/Constants";
 import { drawCourt } from "../../lib/halfcourt/Utilities";
 
 /**
@@ -35,26 +39,17 @@ The `Halfcourt` component renders an SVG element with a width of 100% and an id 
 export const Halfcourt: React.FC<ICourt> = (props) => {
   const containerRef = React.useRef<SVGSVGElement | null>(null);
 
-  const id = `shotchart-${props.id}`
+  const id = `shotchart-${props.id}`;
 
   React.useEffect(() => {
-      let svg = document.getElementById(id);
-      console.log(`shotchart-${props.id}`)
-      if (svg) svg.innerHTML = "";
-      const chartSettings = SHOTCHART_SETTINGS(
-        props.courtType === "NBA" ? NBA_SETTINGS : COLL_SETTINGS,
-        props.id
-      );
-      drawCourt(chartSettings, containerRef);
-
-
+    let svg = document.getElementById(id);
+    if (svg) svg.innerHTML = "";
+    const chartSettings = SHOTCHART_SETTINGS(
+      props.courtType === "NBA" ? NBA_SETTINGS : COLL_SETTINGS,
+      props.id
+    );
+    drawCourt(chartSettings, containerRef);
   }, [props.courtType]);
 
-  return (
-    <svg
-      ref={containerRef}
-      width="100%"
-      id={id}
-    ></svg>
-  );
+  return <svg ref={containerRef} width="100%" id={id}></svg>;
 };

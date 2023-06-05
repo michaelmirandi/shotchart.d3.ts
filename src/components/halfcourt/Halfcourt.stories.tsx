@@ -9,14 +9,21 @@ export default {
   title: "Example/Halfcourt",
   component: Halfcourt,
   parameters: {
-    id: {default: getSalt()}
-  },  
+    id: { default: getSalt() },
+  },
 } as Meta<typeof Halfcourt>;
 
 const Template: StoryFn<typeof Halfcourt> = (args) => (
-  <Box sx={{width: '100%', display: 'flex', alignItems: 'center', justifyContent: 'center'}}>
-    <Box sx={{width: '45%'}}>
-      <Halfcourt {...args} id={getSalt()}/>
+  <Box
+    sx={{
+      width: "100%",
+      display: "flex",
+      alignItems: "center",
+      justifyContent: "center",
+    }}
+  >
+    <Box sx={{ width: "45%" }}>
+      <Halfcourt {...args} id={getSalt()} />
     </Box>
   </Box>
 );

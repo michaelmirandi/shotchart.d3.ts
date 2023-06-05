@@ -5,7 +5,7 @@ import peerDepsExternal from "rollup-plugin-peer-deps-external";
 import css from "rollup-plugin-import-css";
 
 const packageJson = require("./package.json");
-const { nodeResolve } = require('@rollup/plugin-node-resolve');
+const { nodeResolve } = require("@rollup/plugin-node-resolve");
 
 export default [
   {

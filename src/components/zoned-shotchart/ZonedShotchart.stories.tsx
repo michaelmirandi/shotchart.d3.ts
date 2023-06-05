@@ -9,14 +9,21 @@ export default {
   title: "Example/Zoned Shotchart",
   component: ZonedShotchart,
   parameters: {
-    id: {default: getSalt()}
-  },  
+    id: { default: getSalt() },
+  },
 } as Meta<typeof ZonedShotchart>;
 
 const Template: StoryFn<typeof ZonedShotchart> = (args) => (
-  <Box sx={{width: '100%', display: 'flex', alignItems: 'center', justifyContent: 'center'}}>
-    <Box sx={{width: '45%'}}>
-      <ZonedShotchart {...args} id={getSalt()}/>
+  <Box
+    sx={{
+      width: "100%",
+      display: "flex",
+      alignItems: "center",
+      justifyContent: "center",
+    }}
+  >
+    <Box sx={{ width: "45%" }}>
+      <ZonedShotchart {...args} id={getSalt()} />
     </Box>
   </Box>
 );

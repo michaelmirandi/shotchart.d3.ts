@@ -31,18 +31,19 @@ export const orangeBlueTheme: string[] = [
 export const percentileText = (
   data: number,
   backgroundTheme: ShotchartBackgroundTheme
-) =>
-  data <= 15 || data >= 85
+) => {
+  return (data <= 15 || data >= 85) && data != null
     ? "light-shotchart-zone"
     : data == null
     ? `${backgroundTheme === "Dark" ? "dark" : "light"}-empty-shot-zone`
     : "";
+};
 
 export const percentileTextBlueOrange = (
   data: number,
   backgroundTheme: ShotchartBackgroundTheme
 ) =>
-  data <= 10
+  data <= 10 && data != null
     ? "light-shotchart-zone"
     : data == null
     ? `${backgroundTheme === "Dark" ? "dark" : "light"}-empty-shot-zone`

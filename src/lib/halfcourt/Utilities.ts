@@ -1,4 +1,4 @@
-import * as d3 from 'd3'
+import * as d3 from "d3";
 import { ICourtLines } from "../zoned-shotchart/Interfaces";
 import { ICourtLocation, IDrawCourt, IShotchartSettings } from "./Interfaces";
 
@@ -292,5 +292,5 @@ export function drawCourt(
     )
     .attr("r", shotchartSettings.basketDiameter / 2);
 
-  return {base, courtLines};
+  return { base, courtLines };
 }

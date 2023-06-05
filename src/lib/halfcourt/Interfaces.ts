@@ -50,5 +50,5 @@ export interface ICourt {
 
 export interface IDrawCourt {
   base: any;
-  courtLines: ICourtLines
+  courtLines: ICourtLines;
 }
