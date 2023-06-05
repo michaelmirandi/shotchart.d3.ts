@@ -1,4 +1,4 @@
-import * as d3 from 'd3';
+import * as d3 from "d3";
 import { IShotchartSettings, ICourtLocation } from "../halfcourt/Interfaces";
 import { ShotchartBackgroundTheme } from "../halfcourt/Types";
 import { ICourtLines, IZoneData, IZonePoints } from "./Interfaces";

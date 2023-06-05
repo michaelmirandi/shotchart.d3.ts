@@ -7,12 +7,9 @@ body {
     Ubuntu, Cantarell, Fira Sans, Droid Sans, Helvetica Neue, sans-serif;
 }
 
-
 #shotzone {
   fill-opacity: 0.7;
 }
-
-
 
 .shot-chart-court * {
   fill: transparent;
