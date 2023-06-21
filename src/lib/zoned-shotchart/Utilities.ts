@@ -23,8 +23,8 @@ export function createSectionedZones(
     Math.PI,
     shotchartSettings.courtWidth / 2,
     shotchartSettings.visibleCourtLength() -
-      shotchartSettings.basketProtrusionLength -
-      shotchartSettings.basketDiameter / 2,
+    shotchartSettings.basketProtrusionLength -
+    shotchartSettings.basketDiameter / 2,
     "rimXY",
     courtLines
   )
@@ -32,12 +32,12 @@ export function createSectionedZones(
     .attr(
       "transform",
       "translate(" +
-        shotchartSettings.courtWidth / 2 +
-        ", " +
-        (shotchartSettings.visibleCourtLength() -
-          shotchartSettings.basketProtrusionLength -
-          shotchartSettings.basketDiameter / 2) +
-        ")"
+      shotchartSettings.courtWidth / 2 +
+      ", " +
+      (shotchartSettings.visibleCourtLength() -
+        shotchartSettings.basketProtrusionLength -
+        shotchartSettings.basketDiameter / 2) +
+      ")"
     );
 
   appendArcPath(
@@ -47,8 +47,8 @@ export function createSectionedZones(
     Math.PI,
     shotchartSettings.courtWidth / 2,
     shotchartSettings.visibleCourtLength() -
-      shotchartSettings.basketProtrusionLength -
-      shotchartSettings.basketDiameter / 2,
+    shotchartSettings.basketProtrusionLength -
+    shotchartSettings.basketDiameter / 2,
     "floaterXY",
     courtLines
   )
@@ -56,12 +56,12 @@ export function createSectionedZones(
     .attr(
       "transform",
       "translate(" +
-        shotchartSettings.courtWidth / 2 +
-        ", " +
-        (shotchartSettings.visibleCourtLength() -
-          shotchartSettings.basketProtrusionLength -
-          shotchartSettings.basketDiameter / 2) +
-        ")"
+      shotchartSettings.courtWidth / 2 +
+      ", " +
+      (shotchartSettings.visibleCourtLength() -
+        shotchartSettings.basketProtrusionLength -
+        shotchartSettings.basketDiameter / 2) +
+      ")"
     );
   // points must be in order
   let rc3 = {
@@ -101,7 +101,7 @@ export function createSectionedZones(
           shotchartSettings.leagueSettings.threePointSideRadius * 2 +
           (shotchartSettings.courtWidth -
             shotchartSettings.leagueSettings.threePointSideRadius * 2) /
-            2,
+          2,
         y: shotchartSettings.visibleCourtLength(),
       },
       {
@@ -109,7 +109,7 @@ export function createSectionedZones(
           shotchartSettings.leagueSettings.threePointSideRadius * 2 +
           (shotchartSettings.courtWidth -
             shotchartSettings.leagueSettings.threePointSideRadius * 2) /
-            2,
+          2,
         y:
           shotchartSettings.visibleCourtLength() -
           shotchartSettings.leagueSettings.threePointCutOffLength,
@@ -159,7 +159,7 @@ export function createSectionedZones(
     return (
       i.x >
       shotchartSettings.courtWidth -
-        shotchartSettings.leagueSettings.leftThreeInside.x
+      shotchartSettings.leagueSettings.leftThreeInside.x
     );
   });
 
@@ -171,7 +171,7 @@ export function createSectionedZones(
           shotchartSettings.leagueSettings.threePointSideRadius * 2 +
           (shotchartSettings.courtWidth -
             shotchartSettings.leagueSettings.threePointSideRadius * 2) /
-            2,
+          2,
         y:
           shotchartSettings.visibleCourtLength() -
           shotchartSettings.leagueSettings.threePointCutOffLength,
@@ -197,8 +197,8 @@ export function createSectionedZones(
     return (
       i.x > shotchartSettings.leagueSettings.rightThreeInside.x &&
       i.x <
-        shotchartSettings.courtWidth -
-          shotchartSettings.leagueSettings.leftThreeInside.x
+      shotchartSettings.courtWidth -
+      shotchartSettings.leagueSettings.leftThreeInside.x
     );
   });
 
@@ -226,11 +226,11 @@ export function createSectionedZones(
     return (
       i.y <= shotchartSettings.visibleCourtLength() &&
       i.y >
-        shotchartSettings.visibleCourtLength() -
-          shotchartSettings.leftBaselineMidrangeInside.y &&
+      shotchartSettings.visibleCourtLength() -
+      shotchartSettings.leftBaselineMidrangeInside.y &&
       (i.x <
         shotchartSettings.courtWidth -
-          shotchartSettings.leftBaselineMidrangeInside.x ||
+        shotchartSettings.leftBaselineMidrangeInside.x ||
         i.x < shotchartSettings.courtWidth / 2)
     );
   });
@@ -253,11 +253,11 @@ export function createSectionedZones(
     return (
       i.y <= shotchartSettings.visibleCourtLength() &&
       i.y >
-        shotchartSettings.visibleCourtLength() -
-          shotchartSettings.rightBaselineMidrangeInside.y &&
+      shotchartSettings.visibleCourtLength() -
+      shotchartSettings.rightBaselineMidrangeInside.y &&
       (i.x >
         shotchartSettings.courtWidth -
-          shotchartSettings.rightBaselineMidrangeInside.x ||
+        shotchartSettings.rightBaselineMidrangeInside.x ||
         i.x > shotchartSettings.courtWidth / 2)
     );
   });
@@ -270,7 +270,7 @@ export function createSectionedZones(
           shotchartSettings.leagueSettings.threePointSideRadius * 2 +
           (shotchartSettings.courtWidth -
             shotchartSettings.leagueSettings.threePointSideRadius * 2) /
-            2,
+          2,
         y: shotchartSettings.visibleCourtLength(),
       },
       {
@@ -278,7 +278,7 @@ export function createSectionedZones(
           shotchartSettings.leagueSettings.threePointSideRadius * 2 +
           (shotchartSettings.courtWidth -
             shotchartSettings.leagueSettings.threePointSideRadius * 2) /
-            2,
+          2,
         y:
           shotchartSettings.visibleCourtLength() -
           shotchartSettings.leagueSettings.threePointCutOffLength,
@@ -291,16 +291,16 @@ export function createSectionedZones(
     return (
       i.y < shotchartSettings.visibleCourtLength() &&
       i.y >=
-        shotchartSettings.visibleCourtLength() -
-          shotchartSettings.rightWingMidrangeInside.y &&
+      shotchartSettings.visibleCourtLength() -
+      shotchartSettings.rightWingMidrangeInside.y &&
       i.x < shotchartSettings.courtWidth / 2 &&
       i.y <= shotchartSettings.visibleCourtLength() &&
       i.y <
-        shotchartSettings.visibleCourtLength() -
-          shotchartSettings.rightBaselineMidrangeInside.y &&
+      shotchartSettings.visibleCourtLength() -
+      shotchartSettings.rightBaselineMidrangeInside.y &&
       i.x <
-        shotchartSettings.courtWidth -
-          shotchartSettings.rightBaselineMidrangeInside.x
+      shotchartSettings.courtWidth -
+      shotchartSettings.rightBaselineMidrangeInside.x
     );
   });
 
@@ -316,16 +316,16 @@ export function createSectionedZones(
     return (
       i.y < shotchartSettings.visibleCourtLength() &&
       i.y >=
-        shotchartSettings.visibleCourtLength() -
-          shotchartSettings.leftWingMidrangeInside.y &&
+      shotchartSettings.visibleCourtLength() -
+      shotchartSettings.leftWingMidrangeInside.y &&
       i.x > shotchartSettings.courtWidth / 2 &&
       i.y <= shotchartSettings.visibleCourtLength() &&
       i.y <
-        shotchartSettings.visibleCourtLength() -
-          shotchartSettings.leftBaselineMidrangeInside.y &&
+      shotchartSettings.visibleCourtLength() -
+      shotchartSettings.leftBaselineMidrangeInside.y &&
       i.x >
-        shotchartSettings.courtWidth -
-          shotchartSettings.leftBaselineMidrangeInside.x
+      shotchartSettings.courtWidth -
+      shotchartSettings.leftBaselineMidrangeInside.x
     );
   });
 
@@ -341,7 +341,7 @@ export function createSectionedZones(
     return (
       i.y <
       shotchartSettings.visibleCourtLength() -
-        shotchartSettings.rightWingMidrangeInside.y
+      shotchartSettings.rightWingMidrangeInside.y
     );
   });
 
@@ -355,8 +355,8 @@ export function createSectionedZones(
   let insideRf = courtLines.rimXY.filter(function (i: ICourtLocation) {
     return (
       i.y >
-        shotchartSettings.visibleCourtLength() -
-          shotchartSettings.rightFloaterInside.y &&
+      shotchartSettings.visibleCourtLength() -
+      shotchartSettings.rightFloaterInside.y &&
       i.x < shotchartSettings.rightFloaterInside.x &&
       i.x < shotchartSettings.courtWidth / 2
     );
@@ -372,8 +372,8 @@ export function createSectionedZones(
   let insideLf = courtLines.rimXY.filter(function (i: ICourtLocation) {
     return (
       i.y >
-        shotchartSettings.visibleCourtLength() -
-          shotchartSettings.leftFloaterInside.y &&
+      shotchartSettings.visibleCourtLength() -
+      shotchartSettings.leftFloaterInside.y &&
       i.x > shotchartSettings.leftFloaterInside.x &&
       i.x > shotchartSettings.courtWidth / 2
     );
@@ -390,7 +390,7 @@ export function createSectionedZones(
     return (
       i.y <
       shotchartSettings.visibleCourtLength() -
-        shotchartSettings.leftFloaterInside.y
+      shotchartSettings.leftFloaterInside.y
     );
   });
 
@@ -479,7 +479,7 @@ export function getPrettyPercentage(fgm: number, fga: number): string {
 
 export function shotZoneColor(perc: number, theme: string[]) {
   let colors = createColorScale(theme);
-  return colors(perc);
+  return perc === -1 ? 'transparent' : colors(perc);
 }
 
 export function createColorScale(
@@ -538,7 +538,7 @@ export function labelShotZones(
     let tempData = findShotZoneData(zoneLookup[key], data)[0];
     tempData =
       tempData == null
-        ? { fga: 0, fgm: 0, percentile: 0, bucket: zoneLookup[key] }
+        ? { fga: 0, fgm: 0, percentile: -1, bucket: zoneLookup[key] }
         : tempData;
     let center = findCentroid(zonePoints.labeledZones[key]);
     let prettyFormat;

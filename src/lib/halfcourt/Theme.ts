@@ -32,19 +32,19 @@ export const percentileText = (
   data: number,
   backgroundTheme: ShotchartBackgroundTheme
 ) => {
-  return (data <= 15 || data >= 85) && data != null
-    ? "light-shotchart-zone"
-    : data == null
+  return data == -1
     ? `${backgroundTheme === "Dark" ? "dark" : "light"}-empty-shot-zone`
-    : "";
+    : (data <= 15 || data >= 85) && data != null
+      ? "light-shotchart-zone"
+      : "";
 };
 
 export const percentileTextBlueOrange = (
   data: number,
   backgroundTheme: ShotchartBackgroundTheme
-) =>
-  data <= 10 && data != null
-    ? "light-shotchart-zone"
-    : data == null
+) => data === -1
     ? `${backgroundTheme === "Dark" ? "dark" : "light"}-empty-shot-zone`
-    : "";
+    :
+    data <= 10 && data != null
+      ? "light-shotchart-zone"
+      : "";
