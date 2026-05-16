@@ -73,7 +73,6 @@ export interface ShotchartSettings {
   rightFloaterInside: Point;
   leftFloaterInside: Point;
   visibleCourtLength: () => number;
-  shotchartNumber: number;
 }
 
 export interface CourtLines {
@@ -105,7 +104,34 @@ export interface ZoneData {
   percentile: number;
 }
 
-export interface DrawCourtResult {
-  base: any;
-  courtLines: CourtLines;
+export interface HalfcourtOptions {
+  /** Court dimensions preset. Defaults to `"nba"`. */
+  courtType?: CourtType;
+  /** Override the preset with a custom league configuration. */
+  leagueSettings?: LeagueSettings;
+}
+
+export interface HalfcourtInstance {
+  /** Remove the rendered court from the host SVG. */
+  destroy(): void;
+}
+
+export interface ZonedShotchartOptions extends HalfcourtOptions {
+  /** Per-zone shot statistics. Zones with no entry render as empty. */
+  data: ZoneData[];
+  /** Color palette for zone fills. Defaults to `"red-green"`. */
+  theme?: Theme;
+  /** Background context — controls text styling for empty zones. Defaults to `"light"`. */
+  backgroundTheme?: BackgroundTheme;
+}
+
+export interface ZonedShotchartInstance {
+  /** Update zone fills + label text without rebuilding the court. */
+  setData(data: ZoneData[]): void;
+  /** Swap the color palette. Walks existing zones, no DOM rebuild. */
+  setTheme(theme: Theme): void;
+  /** Update the background-aware text styling. */
+  setBackground(backgroundTheme: BackgroundTheme): void;
+  /** Remove the rendered chart from the host SVG. */
+  destroy(): void;
 }

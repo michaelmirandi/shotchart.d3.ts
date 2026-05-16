@@ -1,9 +1,6 @@
 import type { LeagueSettings, ShotchartSettings } from "../types";
 
-export function createShotchartSettings(
-  leagueSettings: LeagueSettings,
-  shotchartNumber: number,
-): ShotchartSettings {
+export function createShotchartSettings(leagueSettings: LeagueSettings): ShotchartSettings {
   return {
     basketDiameter: 1.5,
     basketProtrusionLength: 4,
@@ -47,6 +44,5 @@ export function createShotchartSettings(
       const threePointLength = leagueSettings.threePointRadius + 4;
       return threePointLength + (halfCourtLength - threePointLength) / 2;
     },
-    shotchartNumber,
   };
 }

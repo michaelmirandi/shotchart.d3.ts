@@ -1,9 +1,6 @@
 import type { BackgroundTheme } from "../types";
 
-export function percentileTextClass(
-  percentile: number,
-  backgroundTheme: BackgroundTheme,
-): string {
+export function percentileTextClass(percentile: number, backgroundTheme: BackgroundTheme): string {
   if (percentile === -1) {
     return `${backgroundTheme}-empty-shot-zone`;
   }

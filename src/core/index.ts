@@ -1,18 +1,26 @@
-export * from "./types";
-export {
-  nbaSettings,
-  collegeSettings,
-  createShotchartSettings,
-} from "./settings";
-export {
-  redGreenPalette,
-  orangeBluePalette,
-  createColorScale,
-  zoneColor,
-  percentileTextClass,
-  percentileTextClassBlueOrange,
-} from "./themes";
+export type {
+  BackgroundTheme,
+  CourtType,
+  HalfcourtInstance,
+  HalfcourtOptions,
+  LeagueSettings,
+  Point,
+  ShotchartZone,
+  ShotchartZoneClassName,
+  Theme,
+  ZoneData,
+  ZonedShotchartInstance,
+  ZonedShotchartOptions,
+} from "./types";
+
+export { nbaSettings } from "./settings/nba";
+export { collegeSettings } from "./settings/college";
+
+export { redGreenPalette, orangeBluePalette } from "./themes/palettes";
+export { createColorScale, zoneColor } from "./themes/color-scale";
+
 export { polygonCentroid } from "./geometry/centroid";
 export { formatPercentage } from "./geometry/percentage";
-export { drawCourt } from "./halfcourt";
-export { drawZones, labelZones, findZoneData } from "./zoned-shotchart";
+
+export { createHalfcourt } from "./halfcourt";
+export { createZonedShotchart } from "./zoned-shotchart";

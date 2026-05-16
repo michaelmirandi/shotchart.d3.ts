@@ -1,10 +1,7 @@
-import * as d3 from "d3";
+import { type ScaleLinear, scaleLinear } from "d3-scale";
 
-export function createColorScale(
-  palette: readonly string[],
-): d3.ScaleLinear<string, string> {
-  return d3
-    .scaleLinear<string>()
+export function createColorScale(palette: readonly string[]): ScaleLinear<string, string> {
+  return scaleLinear<string>()
     .domain([0, 10, 20, 30, 40, 50, 60, 70, 80, 90, 100])
     .range(palette as string[]);
 }

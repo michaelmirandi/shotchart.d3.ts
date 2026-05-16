@@ -3,22 +3,33 @@
   "version": "0.2.0",
   "description": "Framework-agnostic basketball shotchart primitives built on D3. Renders to any SVG element. Supports NBA and college court dimensions.",
   "type": "module",
-  "main": "dist/cjs/index.js",
-  "module": "dist/esm/index.js",
-  "sideEffects": [
-    "**/*.css"
-  ],
-  "files": [
-    "dist",
-    "src/styles"
-  ],
+  "main": "./dist/index.cjs",
+  "module": "./dist/index.js",
+  "types": "./dist/index.d.ts",
+  "exports": {
+    ".": {
+      "import": {
+        "types": "./dist/index.d.ts",
+        "default": "./dist/index.js"
+      },
+      "require": {
+        "types": "./dist/index.d.cts",
+        "default": "./dist/index.cjs"
+      }
+    },
+    "./styles.css": "./dist/styles/shotchart.css",
+    "./package.json": "./package.json"
+  },
+  "sideEffects": ["**/*.css"],
+  "files": ["dist"],
   "engines": {
     "node": ">=20"
   },
   "packageManager": "pnpm@10.33.4",
   "scripts": {
-    "build": "rollup -c --bundleConfigAsCjs",
-    "lint": "npx prettier --write ."
+    "build": "tsup",
+    "typecheck": "tsc --noEmit",
+    "lint": "biome check --write ."
   },
   "repository": {
     "type": "git",
@@ -31,7 +42,8 @@
     "svg",
     "typescript",
     "visualization",
-    "nba"
+    "nba",
+    "ncaa"
   ],
   "author": "Michael Mirandi",
   "license": "ISC",
@@ -40,19 +52,18 @@
   },
   "homepage": "https://github.com/michaelmirandi/shotchart.d3.ts#readme",
   "dependencies": {
-    "d3": "^7.3.0"
+    "d3-array": "^3.2.4",
+    "d3-scale": "^4.0.2",
+    "d3-selection": "^3.0.0",
+    "d3-shape": "^3.2.0"
   },
   "devDependencies": {
-    "@rollup/plugin-commonjs": "^22.0.2",
-    "@rollup/plugin-node-resolve": "^13.3.0",
-    "@rollup/plugin-typescript": "^8.3.4",
-    "@types/d3": "^7.4.0",
-    "rollup": "^3.23.0",
-    "rollup-plugin-dts": "^4.2.2",
-    "rollup-plugin-ignore": "^1.0.10",
-    "rollup-plugin-import-css": "^3.0.3",
-    "rollup-plugin-peer-deps-external": "^2.2.4",
-    "rollup-plugin-terser": "^7.0.2",
+    "@biomejs/biome": "^1.9.4",
+    "@types/d3-array": "^3.2.1",
+    "@types/d3-scale": "^4.0.8",
+    "@types/d3-selection": "^3.0.10",
+    "@types/d3-shape": "^3.1.6",
+    "tsup": "^8.0.0",
     "typescript": "^5.4.0"
   }
 }

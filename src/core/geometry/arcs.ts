@@ -1,8 +1,14 @@
-import * as d3 from "d3";
+import { range } from "d3-array";
+import { scaleLinear } from "d3-scale";
+import type { Selection } from "d3-selection";
+import { lineRadial } from "d3-shape";
 import type { CourtLineKey, CourtLines, Point } from "../types";
 
+type GroupSelection = Selection<SVGGElement, unknown, null, undefined>;
+type PathSelection = Selection<SVGPathElement, number[], null, undefined>;
+
 export function appendArcPath(
-  base: any,
+  base: GroupSelection,
   radius: number,
   startAngle: number,
   endAngle: number,
@@ -10,28 +16,27 @@ export function appendArcPath(
   translateY?: number,
   xyKey?: CourtLineKey,
   courtLines?: CourtLines,
-): any {
+): PathSelection {
   const points = 1500;
 
-  const a = d3
-    .scaleLinear()
+  const angle = scaleLinear()
     .domain([0, points - 1])
     .range([startAngle, endAngle]);
 
   const collected: Point[] = [];
-  const line = d3
-    .lineRadial()
+  const line = lineRadial<number>()
     .radius(radius)
-    .angle((_d: unknown, i: number) => {
+    .angle((_d, i) => {
       collected.push({
-        x: (translateX ?? 0) + radius * Math.cos(a(i) - Math.PI / 2),
-        y: (translateY ?? 0) + radius * Math.sin(a(i) - Math.PI / 2),
+        x: (translateX ?? 0) + radius * Math.cos(angle(i) - Math.PI / 2),
+        y: (translateY ?? 0) + radius * Math.sin(angle(i) - Math.PI / 2),
       });
-      return a(i);
+      return angle(i);
     });
 
   if (xyKey !== undefined && courtLines !== undefined) {
     courtLines[xyKey] = collected;
   }
-  return base.append("path").datum(d3.range(points)).attr("d", line);
+
+  return base.append("path").datum(range(points)).attr("d", line);
 }

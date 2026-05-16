@@ -64,7 +64,7 @@ text {
   stroke: white !important;
 }
 
-@media screen and (min-aspect-ratio: 11/8) {
+@media screen and (min-aspect-ratio: 11 / 8) {
   text {
     font-size: 0.07rem;
   }
