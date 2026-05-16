@@ -1,2 +1,2 @@
-export declare type ShotchartBackgroundTheme = "Dark" | "Light";
-export declare type CourtType = "NBA" | "COLL";
+export type ShotchartBackgroundTheme = "Dark" | "Light";
+export type CourtType = "NBA" | "COLL";

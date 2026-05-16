@@ -4,7 +4,7 @@ export interface ICourtLocation {
     x: number;
     y: number;
 }
-export declare type ThemeType = "B/O" | "R/G";
+export type ThemeType = "B/O" | "R/G";
 export interface ILeagueSettings {
     leagueId: string;
     keyWidth: number;

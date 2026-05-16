@@ -1,3 +1,3 @@
-export declare type lookup<T> = {
+export type lookup<T> = {
     [key: string]: T;
 };
