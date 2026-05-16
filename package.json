@@ -28,8 +28,15 @@
   "packageManager": "pnpm@10.33.4",
   "scripts": {
     "build": "tsup",
+    "dev": "tsup --watch",
     "typecheck": "tsc --noEmit",
-    "lint": "biome check --write ."
+    "lint": "biome check --write .",
+    "ci:lint": "biome check .",
+    "ci:publint": "publint",
+    "ci:attw": "attw --pack",
+    "release:patch": "pnpm version patch && git push --follow-tags",
+    "release:minor": "pnpm version minor && git push --follow-tags",
+    "release:major": "pnpm version major && git push --follow-tags"
   },
   "repository": {
     "type": "git",
@@ -58,11 +65,13 @@
     "d3-shape": "^3.2.0"
   },
   "devDependencies": {
+    "@arethetypeswrong/cli": "^0.18.2",
     "@biomejs/biome": "^1.9.4",
     "@types/d3-array": "^3.2.1",
     "@types/d3-scale": "^4.0.8",
     "@types/d3-selection": "^3.0.10",
     "@types/d3-shape": "^3.1.6",
+    "publint": "^0.3.21",
     "tsup": "^8.0.0",
     "typescript": "^5.4.0"
   }
