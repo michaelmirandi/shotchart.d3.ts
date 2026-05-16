@@ -13,7 +13,7 @@ export default [
       if (warning.code === "CIRCULAR_DEPENDENCY") return;
       warn(warning);
     },
-    input: "index.ts",
+    input: "src/index.ts",
     output: [
       {
         file: packageJson.main,
@@ -34,6 +34,6 @@ export default [
       terser(),
       css(),
     ],
-    external: ["react", "react-dom", "styled-components"],
+    external: [],
   },
 ];
